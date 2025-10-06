@@ -1,0 +1,48 @@
+.gamePage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  color: white;
+  font-size: 48px;
+  margin-bottom: 40px;
+  font-weight: 900;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: -1px;
+}
+
+.gameContent {
+  display: flex;
+  gap: 36px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.icon {
+  font-size: 24px;
+}
