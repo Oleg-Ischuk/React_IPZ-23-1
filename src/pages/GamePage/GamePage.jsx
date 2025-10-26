@@ -1,25 +1,35 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Board from "../../components/Board/Board";
 import GameInfo from "../../components/GameInfo/GameInfo";
 import Button from "../../components/Button/Button";
 import { MdExitToApp } from "react-icons/md";
+import { useConnectFour, useBoardClick } from "../../hooks";
 import styles from "./GamePage.module.css";
 
 function GamePage({ onGameEnd }) {
-  const initialBoard = Array(6)
-    .fill(null)
-    .map(() => Array(7).fill("empty"));
+  const { board, currentPlayer, moves, winner, gameOver, makeMove, resetGame } =
+    useConnectFour();
+  const { handleColumnClick } = useBoardClick(makeMove);
 
-  const [board, setBoard] = useState(initialBoard);
-  const [currentPlayer, setCurrentPlayer] = useState("red");
-  const [moves, setMoves] = useState(0);
+  useEffect(() => {
+    if (gameOver) {
+      setTimeout(() => {
+        onGameEnd({ winner: winner || "draw", moves });
+        resetGame();
+      }, 1000);
+    }
+  }, [gameOver, winner, moves, onGameEnd, resetGame]);
 
   const handleCellClick = (row, col) => {
-    console.log(`Клік на клітинку: рядок ${row}, колонка ${col}`);
+    handleColumnClick(col);
   };
 
   const handleEndGame = () => {
-    onGameEnd({ winner: currentPlayer, moves });
+    if (moves === 0) {
+      onGameEnd({ winner: "draw", moves: 0 });
+    } else {
+      onGameEnd({ winner: currentPlayer, moves });
+    }
   };
 
   return (
