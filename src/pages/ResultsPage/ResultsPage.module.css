@@ -116,6 +116,15 @@
   border: 3px solid #fcd34d;
 }
 
+.cancelledText {
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: #64748b;
+  padding: 8px 0;
+}
+
 .actions {
   display: flex;
   justify-content: center;

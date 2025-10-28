@@ -26,9 +26,10 @@ function GamePage({ onGameEnd }) {
 
   const handleEndGame = () => {
     if (moves === 0) {
-      onGameEnd({ winner: "draw", moves: 0 });
+      onGameEnd({ winner: "cancelled", moves: 0 });
     } else {
-      onGameEnd({ winner: currentPlayer, moves });
+      const winnerPlayer = currentPlayer === "red" ? "yellow" : "red";
+      onGameEnd({ winner: winnerPlayer, moves });
     }
   };
 

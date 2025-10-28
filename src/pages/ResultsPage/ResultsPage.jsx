@@ -1,22 +1,35 @@
 import Button from "../../components/Button/Button";
-import { FaTrophy, FaRedo, FaHashtag, FaHandshake } from "react-icons/fa";
+import {
+  FaTrophy,
+  FaRedo,
+  FaHashtag,
+  FaHandshake,
+  FaBan,
+} from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
 import styles from "./ResultsPage.module.css";
 
 function ResultsPage({ result, onRestart }) {
   const isDraw = result?.winner === "draw";
+  const isCancelled = result?.winner === "cancelled";
 
   return (
     <div className={styles.resultsPage}>
       <div className={styles.container}>
         <div className={styles.trophy}>
-          {isDraw ? <FaHandshake /> : <FaTrophy />}
+          {isCancelled ? <FaBan /> : isDraw ? <FaHandshake /> : <FaTrophy />}
         </div>
 
-        <h1 className={styles.title}>{isDraw ? "Нічия!" : "Гру завершено!"}</h1>
+        <h1 className={styles.title}>
+          {isCancelled
+            ? "Гру скасовано!"
+            : isDraw
+            ? "Нічия!"
+            : "Гру завершено!"}
+        </h1>
 
         <div className={styles.resultInfo}>
-          {!isDraw && (
+          {!isDraw && !isCancelled && (
             <div className={styles.resultItem}>
               <span className={styles.label}>
                 <GiToken /> Переможець:
@@ -28,12 +41,22 @@ function ResultsPage({ result, onRestart }) {
             </div>
           )}
 
-          <div className={styles.resultItem}>
-            <span className={styles.label}>
-              <FaHashtag /> Загальна кількість ходів:
-            </span>
-            <span className={styles.value}>{result?.moves || 0}</span>
-          </div>
+          {!isCancelled && (
+            <div className={styles.resultItem}>
+              <span className={styles.label}>
+                <FaHashtag /> Загальна кількість ходів:
+              </span>
+              <span className={styles.value}>{result?.moves || 0}</span>
+            </div>
+          )}
+
+          {isCancelled && (
+            <div className={styles.resultItem}>
+              <span className={styles.cancelledText}>
+                Гру було скасовано до початку
+              </span>
+            </div>
+          )}
         </div>
 
         <div className={styles.actions}>
