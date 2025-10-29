@@ -1,9 +1,13 @@
 import { useState, useCallback } from "react";
-
-const ROWS = 6;
-const COLS = 7;
+import { useSettings } from "../context";
+import { DIFFICULTY_LEVELS } from "../constants/gameSettings";
 
 export const useConnectFour = () => {
+  const { settings } = useSettings();
+  const difficulty = DIFFICULTY_LEVELS[settings.difficulty.toUpperCase()];
+  const ROWS = difficulty.rows;
+  const COLS = difficulty.cols;
+
   const [board, setBoard] = useState(() =>
     Array(ROWS)
       .fill(null)
@@ -14,56 +18,59 @@ export const useConnectFour = () => {
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
-  const checkWinner = useCallback((board, row, col, player) => {
-    const directions = [
-      { row: 0, col: 1 },
-      { row: 1, col: 0 },
-      { row: 1, col: 1 },
-      { row: 1, col: -1 },
-    ];
+  const checkWinner = useCallback(
+    (board, row, col, player) => {
+      const directions = [
+        { row: 0, col: 1 },
+        { row: 1, col: 0 },
+        { row: 1, col: 1 },
+        { row: 1, col: -1 },
+      ];
 
-    for (let { row: dRow, col: dCol } of directions) {
-      let count = 1;
+      for (let { row: dRow, col: dCol } of directions) {
+        let count = 1;
 
-      for (let i = 1; i < 4; i++) {
-        const newRow = row + dRow * i;
-        const newCol = col + dCol * i;
-        if (
-          newRow >= 0 &&
-          newRow < ROWS &&
-          newCol >= 0 &&
-          newCol < COLS &&
-          board[newRow][newCol] === player
-        ) {
-          count++;
-        } else {
-          break;
+        for (let i = 1; i < 4; i++) {
+          const newRow = row + dRow * i;
+          const newCol = col + dCol * i;
+          if (
+            newRow >= 0 &&
+            newRow < ROWS &&
+            newCol >= 0 &&
+            newCol < COLS &&
+            board[newRow][newCol] === player
+          ) {
+            count++;
+          } else {
+            break;
+          }
+        }
+
+        for (let i = 1; i < 4; i++) {
+          const newRow = row - dRow * i;
+          const newCol = col - dCol * i;
+          if (
+            newRow >= 0 &&
+            newRow < ROWS &&
+            newCol >= 0 &&
+            newCol < COLS &&
+            board[newRow][newCol] === player
+          ) {
+            count++;
+          } else {
+            break;
+          }
+        }
+
+        if (count >= 4) {
+          return true;
         }
       }
 
-      for (let i = 1; i < 4; i++) {
-        const newRow = row - dRow * i;
-        const newCol = col - dCol * i;
-        if (
-          newRow >= 0 &&
-          newRow < ROWS &&
-          newCol >= 0 &&
-          newCol < COLS &&
-          board[newRow][newCol] === player
-        ) {
-          count++;
-        } else {
-          break;
-        }
-      }
-
-      if (count >= 4) {
-        return true;
-      }
-    }
-
-    return false;
-  }, []);
+      return false;
+    },
+    [ROWS, COLS]
+  );
 
   const makeMove = useCallback(
     (col) => {
@@ -93,7 +100,7 @@ export const useConnectFour = () => {
 
       return false;
     },
-    [board, currentPlayer, gameOver, moves, checkWinner]
+    [board, currentPlayer, gameOver, moves, checkWinner, ROWS, COLS]
   );
 
   const resetGame = useCallback(() => {
@@ -106,7 +113,7 @@ export const useConnectFour = () => {
     setMoves(0);
     setWinner(null);
     setGameOver(false);
-  }, []);
+  }, [ROWS, COLS]);
 
   return {
     board,

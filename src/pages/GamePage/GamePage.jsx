@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Board from "../../components/Board/Board";
 import GameInfo from "../../components/GameInfo/GameInfo";
 import Button from "../../components/Button/Button";
+import GameEndModal from "../../components/GameEndModal/GameEndModal";
 import { MdExitToApp } from "react-icons/md";
 import { useConnectFour, useBoardClick } from "../../hooks";
 import styles from "./GamePage.module.css";
@@ -10,26 +11,49 @@ function GamePage({ onGameEnd }) {
   const { board, currentPlayer, moves, winner, gameOver, makeMove, resetGame } =
     useConnectFour();
   const { handleColumnClick } = useBoardClick(makeMove);
+  const [showModal, setShowModal] = useState(false);
+  const [modalResult, setModalResult] = useState(null);
 
   useEffect(() => {
-    if (gameOver) {
-      setTimeout(() => {
-        onGameEnd({ winner: winner || "draw", moves });
-        resetGame();
-      }, 1000);
+    if (gameOver && winner) {
+      setModalResult({ winner: winner, moves });
+      setShowModal(true);
+    } else if (gameOver && !winner && moves > 0) {
+      setModalResult({ winner: "draw", moves });
+      setShowModal(true);
     }
-  }, [gameOver, winner, moves, onGameEnd, resetGame]);
+  }, [gameOver, winner, moves]);
 
   const handleCellClick = (row, col) => {
-    handleColumnClick(col);
+    if (!gameOver) {
+      handleColumnClick(col);
+    }
   };
 
   const handleEndGame = () => {
     if (moves === 0) {
-      onGameEnd({ winner: "cancelled", moves: 0 });
+      setModalResult({ winner: "cancelled", moves: 0 });
+      setShowModal(true);
     } else {
       const winnerPlayer = currentPlayer === "red" ? "yellow" : "red";
-      onGameEnd({ winner: winnerPlayer, moves });
+      setModalResult({ winner: winnerPlayer, moves });
+      setShowModal(true);
+    }
+  };
+
+  const handleRestart = () => {
+    setShowModal(false);
+    setModalResult(null);
+    resetGame();
+  };
+
+  const handleMainMenu = () => {
+    setShowModal(false);
+    setModalResult(null);
+    if (modalResult?.winner === "cancelled") {
+      onGameEnd({ winner: "cancelled", moves: 0 });
+    } else {
+      onGameEnd(modalResult);
     }
   };
 
@@ -52,6 +76,14 @@ function GamePage({ onGameEnd }) {
           </div>
         </div>
       </div>
+
+      <GameEndModal
+        isOpen={showModal}
+        onClose={handleRestart}
+        result={modalResult}
+        onRestart={handleRestart}
+        onMainMenu={handleMainMenu}
+      />
     </div>
   );
 }

@@ -3,56 +3,47 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: relative;
-  z-index: 1;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
-  padding: 56px 72px;
-  border-radius: 28px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   text-align: center;
-  max-width: 550px;
+  max-width: 500px;
   width: 100%;
 }
 
 .title {
-  font-size: 56px;
-  background: linear-gradient(135deg, #1e3a8a, #7e22ce, #be185d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0 0 12px 0;
-  font-weight: 900;
-  letter-spacing: -1px;
+  font-size: 48px;
+  color: #10b981;
+  margin: 0 0 10px 0;
+  font-weight: 700;
 }
 
 .subtitle {
-  font-size: 22px;
-  color: #64748b;
-  margin: 0 0 40px 0;
+  font-size: 20px;
+  color: #888;
+  margin: 0 0 35px 0;
   font-style: italic;
-  font-weight: 500;
 }
 
 .rules {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  padding: 28px;
-  border-radius: 16px;
-  margin-bottom: 36px;
+  background: rgba(132, 250, 176, 0.2);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
   text-align: left;
-  border: 2px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(132, 250, 176, 0.4);
 }
 
 .rules h3 {
-  margin: 0 0 16px 0;
-  color: #1e293b;
-  font-size: 22px;
-  font-weight: 700;
+  margin: 0 0 15px 0;
+  color: #10b981;
+  font-size: 20px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -60,36 +51,33 @@
 
 .rules ul {
   margin: 0;
-  padding-left: 0;
+  padding-left: 25px;
   list-style: none;
 }
 
 .rules li {
-  margin-bottom: 14px;
-  color: #475569;
-  font-size: 16px;
-  line-height: 1.6;
-  padding-left: 32px;
+  margin-bottom: 12px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
   position: relative;
 }
 
 .rules li::before {
   content: "✓";
   position: absolute;
-  left: 0;
-  color: #10b981;
+  left: -25px;
+  color: #84fab0;
   font-weight: bold;
-  font-size: 20px;
-  width: 24px;
-  height: 24px;
-  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  font-size: 18px;
 }
 
 .rules li:last-child {
   margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }

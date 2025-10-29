@@ -18,11 +18,16 @@ export const useNavigation = () => {
     setCurrentPage("start");
   };
 
+  const navigateToSettings = () => {
+    setCurrentPage("settings");
+  };
+
   return {
     currentPage,
     gameResult,
     navigateToGame,
     navigateToResults,
     navigateToStart,
+    navigateToSettings,
   };
 };

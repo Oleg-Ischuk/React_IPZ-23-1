@@ -1,9 +1,8 @@
 import Button from "../../components/Button/Button";
-import { FaGamepad, FaInfoCircle } from "react-icons/fa";
-import { GiToken } from "react-icons/gi";
+import { FaGamepad, FaInfoCircle, FaCog } from "react-icons/fa";
 import styles from "./StartPage.module.css";
 
-function StartPage({ onStartGame }) {
+function StartPage({ onStartGame, onOpenSettings }) {
   return (
     <div className={styles.startPage}>
       <div className={styles.container}>
@@ -20,9 +19,14 @@ function StartPage({ onStartGame }) {
             <li>Переможець той, хто перший зібрав 4 в ряд</li>
           </ul>
         </div>
-        <Button onClick={onStartGame} variant="primary">
-          <FaGamepad /> Почати гру
-        </Button>
+        <div className={styles.actions}>
+          <Button onClick={onStartGame} variant="primary">
+            <FaGamepad /> Почати гру
+          </Button>
+          <Button onClick={onOpenSettings} variant="secondary">
+            <FaCog /> Налаштування
+          </Button>
+        </div>
       </div>
     </div>
   );

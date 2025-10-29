@@ -1,6 +1,7 @@
 import StartPage from "./pages/StartPage/StartPage";
 import GamePage from "./pages/GamePage/GamePage";
 import ResultsPage from "./pages/ResultsPage/ResultsPage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import { useNavigation } from "./hooks";
 import styles from "./App.module.css";
 
@@ -11,18 +12,39 @@ function App() {
     navigateToGame,
     navigateToResults,
     navigateToStart,
+    navigateToSettings,
   } = useNavigation();
+
+  const handleGameEnd = (result) => {
+    if (result.winner === "cancelled") {
+      navigateToStart();
+    } else {
+      navigateToResults(result);
+    }
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case "start":
-        return <StartPage onStartGame={navigateToGame} />;
+        return (
+          <StartPage
+            onStartGame={navigateToGame}
+            onOpenSettings={navigateToSettings}
+          />
+        );
       case "game":
-        return <GamePage onGameEnd={navigateToResults} />;
+        return <GamePage onGameEnd={handleGameEnd} />;
       case "results":
         return <ResultsPage result={gameResult} onRestart={navigateToStart} />;
+      case "settings":
+        return <SettingsPage onBack={navigateToStart} />;
       default:
-        return <StartPage onStartGame={navigateToGame} />;
+        return (
+          <StartPage
+            onStartGame={navigateToGame}
+            onOpenSettings={navigateToSettings}
+          />
+        );
     }
   };
 

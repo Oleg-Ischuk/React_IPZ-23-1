@@ -1,8 +1,14 @@
 import { FaUser, FaHashtag } from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
+import { useSettings } from "../../context";
 import styles from "./GameInfo.module.css";
 
 function GameInfo({ currentPlayer, moves }) {
+  const { settings } = useSettings();
+
+  const playerName =
+    currentPlayer === "red" ? settings.playerOneName : settings.playerTwoName;
+
   return (
     <div className={styles.gameInfo}>
       <div className={styles.infoItem}>
@@ -11,7 +17,7 @@ function GameInfo({ currentPlayer, moves }) {
         </span>
         <span className={`${styles.player} ${styles[currentPlayer]}`}>
           <GiToken />
-          {currentPlayer === "red" ? "Червоний" : "Жовтий"}
+          {playerName}
         </span>
       </div>
       <div className={styles.infoItem}>
