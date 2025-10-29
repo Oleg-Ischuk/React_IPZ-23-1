@@ -1,9 +1,9 @@
-import { FaUser, FaHashtag } from "react-icons/fa";
+import { FaUser, FaHashtag, FaClock } from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
 import { useSettings } from "../../context";
 import styles from "./GameInfo.module.css";
 
-function GameInfo({ currentPlayer, moves }) {
+function GameInfo({ currentPlayer, moves, timeLeft }) {
   const { settings } = useSettings();
 
   const playerName =
@@ -20,6 +20,20 @@ function GameInfo({ currentPlayer, moves }) {
           {playerName}
         </span>
       </div>
+
+      {timeLeft !== null && (
+        <div className={styles.infoItem}>
+          <span className={styles.label}>
+            <FaClock /> Залишилось часу:
+          </span>
+          <span
+            className={`${styles.value} ${timeLeft <= 5 ? styles.warning : ""}`}
+          >
+            {timeLeft}с
+          </span>
+        </div>
+      )}
+
       <div className={styles.infoItem}>
         <span className={styles.label}>
           <FaHashtag /> Кількість ходів:

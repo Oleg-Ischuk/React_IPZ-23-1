@@ -3,7 +3,7 @@ import { FaCog } from "react-icons/fa";
 import { settingsValidationSchema } from "../../utils/validation";
 import {
   DIFFICULTY_LEVELS,
-  ANIMATION_SPEEDS,
+  MOVE_TIME_LIMITS,
 } from "../../constants/gameSettings";
 import Button from "../Button/Button";
 import styles from "./SettingsForm.module.css";
@@ -15,7 +15,7 @@ function SettingsForm({ initialValues, onSubmit, onCancel }) {
       validationSchema={settingsValidationSchema}
       onSubmit={onSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, values, setFieldValue }) => (
         <Form className={styles.form}>
           <h2 className={styles.title}>
             <FaCog /> Налаштування гри
@@ -45,22 +45,24 @@ function SettingsForm({ initialValues, onSubmit, onCancel }) {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>Швидкість анімації</label>
+            <label className={styles.label}>Ліміт часу на хід</label>
             <div className={styles.radioGroup}>
-              {Object.values(ANIMATION_SPEEDS).map((speed) => (
-                <label key={speed.value} className={styles.radioLabel}>
-                  <Field
+              {Object.values(MOVE_TIME_LIMITS).map((limit) => (
+                <label key={limit.value} className={styles.radioLabel}>
+                  <input
                     type="radio"
-                    name="animationSpeed"
-                    value={speed.value}
+                    name="moveTimeLimit"
+                    value={limit.value}
+                    checked={values.moveTimeLimit === limit.value}
+                    onChange={() => setFieldValue("moveTimeLimit", limit.value)}
                     className={styles.radio}
                   />
-                  <span className={styles.radioText}>{speed.label}</span>
+                  <span className={styles.radioText}>{limit.label}</span>
                 </label>
               ))}
             </div>
-            {errors.animationSpeed && touched.animationSpeed && (
-              <div className={styles.error}>{errors.animationSpeed}</div>
+            {errors.moveTimeLimit && touched.moveTimeLimit && (
+              <div className={styles.error}>{errors.moveTimeLimit}</div>
             )}
           </div>
 

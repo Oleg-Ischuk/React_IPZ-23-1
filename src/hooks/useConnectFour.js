@@ -74,7 +74,16 @@ export const useConnectFour = () => {
 
   const makeMove = useCallback(
     (col) => {
-      if (gameOver || col < 0 || col >= COLS) {
+      if (gameOver) {
+        return false;
+      }
+
+      if (col === -1) {
+        setCurrentPlayer((prev) => (prev === "red" ? "yellow" : "red"));
+        return true;
+      }
+
+      if (col < 0 || col >= COLS) {
         return false;
       }
 
