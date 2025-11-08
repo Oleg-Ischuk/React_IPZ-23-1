@@ -10,18 +10,10 @@ function App() {
     currentPage,
     gameResult,
     navigateToGame,
-    navigateToResults,
     navigateToStart,
     navigateToSettings,
+    endGame,
   } = useNavigation();
-
-  const handleGameEnd = (result) => {
-    if (result.winner === "cancelled") {
-      navigateToStart();
-    } else {
-      navigateToResults(result);
-    }
-  };
 
   const renderPage = () => {
     switch (currentPage) {
@@ -33,9 +25,15 @@ function App() {
           />
         );
       case "game":
-        return <GamePage onGameEnd={handleGameEnd} />;
+        return <GamePage onGameEnd={endGame} />;
       case "results":
-        return <ResultsPage result={gameResult} onRestart={navigateToStart} />;
+        return (
+          <ResultsPage
+            result={gameResult}
+            onRestart={navigateToGame}
+            onMainMenu={navigateToStart}
+          />
+        );
       case "settings":
         return <SettingsPage onBack={navigateToStart} />;
       default:

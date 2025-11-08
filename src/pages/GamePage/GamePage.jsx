@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import Board from "../../components/Board/Board";
 import GameInfo from "../../components/GameInfo/GameInfo";
 import Button from "../../components/Button/Button";
-import GameEndModal from "../../components/GameEndModal/GameEndModal";
 import { MdExitToApp } from "react-icons/md";
 import { FaHourglassHalf } from "react-icons/fa";
 import { useConnectFour, useBoardClick } from "../../hooks";
@@ -10,12 +9,10 @@ import { useSettings } from "../../context";
 import styles from "./GamePage.module.css";
 
 function GamePage({ onGameEnd }) {
-  const { board, currentPlayer, moves, winner, gameOver, makeMove, resetGame } =
+  const { board, currentPlayer, moves, winner, gameOver, makeMove } =
     useConnectFour();
   const { handleColumnClick } = useBoardClick(makeMove);
   const { settings } = useSettings();
-  const [showModal, setShowModal] = useState(false);
-  const [modalResult, setModalResult] = useState(null);
   const [timeLeft, setTimeLeft] = useState(settings.moveTimeLimit);
   const [showTimeoutMessage, setShowTimeoutMessage] = useState(false);
   const [skippedPlayer, setSkippedPlayer] = useState(null);
@@ -85,13 +82,11 @@ function GamePage({ onGameEnd }) {
 
   useEffect(() => {
     if (gameOver && winner) {
-      setModalResult({ winner: winner, moves });
-      setShowModal(true);
+      onGameEnd({ winner: winner, moves });
     } else if (gameOver && !winner && moves > 0) {
-      setModalResult({ winner: "draw", moves });
-      setShowModal(true);
+      onGameEnd({ winner: "draw", moves });
     }
-  }, [gameOver, winner, moves]);
+  }, [gameOver, winner, moves, onGameEnd]);
 
   const handleCellClick = (row, col) => {
     if (!gameOver && !showTimeoutMessage) {
@@ -103,40 +98,17 @@ function GamePage({ onGameEnd }) {
   };
 
   const handleEndGame = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+
     if (moves === 0) {
-      setModalResult({ winner: "cancelled", moves: 0 });
-      setShowModal(true);
+      onGameEnd({ winner: "cancelled", moves: 0 });
     } else {
       const winnerPlayer = currentPlayer === "red" ? "yellow" : "red";
-      setModalResult({ winner: winnerPlayer, moves });
-      setShowModal(true);
+      onGameEnd({ winner: winnerPlayer, moves });
     }
-  };
-
-  const handleRestart = () => {
-    setShowModal(false);
-    setTimeLeft(settings.moveTimeLimit);
-    setShowTimeoutMessage(false);
-    setSkippedPlayer(null);
-    isSkippingRef.current = false;
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-    resetGame();
-    setModalResult(null);
-  };
-
-  const handleMainMenu = () => {
-    const resultToSend = modalResult;
-
-    setShowModal(false);
-    setModalResult(null);
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-    onGameEnd(resultToSend);
   };
 
   const skippedPlayerName =
@@ -180,14 +152,6 @@ function GamePage({ onGameEnd }) {
           </div>
         </div>
       </div>
-
-      <GameEndModal
-        isOpen={showModal}
-        onClose={handleRestart}
-        result={modalResult}
-        onRestart={handleRestart}
-        onMainMenu={handleMainMenu}
-      />
     </div>
   );
 }

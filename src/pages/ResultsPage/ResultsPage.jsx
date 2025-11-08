@@ -5,13 +5,23 @@ import {
   FaHashtag,
   FaHandshake,
   FaBan,
+  FaHome,
 } from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
+import { useSettings } from "../../context";
 import styles from "./ResultsPage.module.css";
 
-function ResultsPage({ result, onRestart }) {
+function ResultsPage({ result, onRestart, onMainMenu }) {
+  const { settings } = useSettings();
   const isDraw = result?.winner === "draw";
   const isCancelled = result?.winner === "cancelled";
+
+  const winnerName =
+    result?.winner === "red"
+      ? settings.playerOneName
+      : result?.winner === "yellow"
+      ? settings.playerTwoName
+      : "";
 
   return (
     <div className={styles.resultsPage}>
@@ -36,7 +46,7 @@ function ResultsPage({ result, onRestart }) {
               </span>
               <span className={`${styles.winner} ${styles[result?.winner]}`}>
                 <GiToken />
-                {result?.winner === "red" ? "Червоний" : "Жовтий"}
+                {winnerName}
               </span>
             </div>
           )}
@@ -44,7 +54,7 @@ function ResultsPage({ result, onRestart }) {
           {!isCancelled && (
             <div className={styles.resultItem}>
               <span className={styles.label}>
-                <FaHashtag /> Загальна кількість ходів:
+                <FaHashtag /> Зроблено ходів:
               </span>
               <span className={styles.value}>{result?.moves || 0}</span>
             </div>
@@ -61,7 +71,10 @@ function ResultsPage({ result, onRestart }) {
 
         <div className={styles.actions}>
           <Button onClick={onRestart} variant="primary">
-            <FaRedo /> Нова гра
+            <FaRedo /> Грати знову
+          </Button>
+          <Button onClick={onMainMenu} variant="secondary">
+            <FaHome /> Головне меню
           </Button>
         </div>
       </div>

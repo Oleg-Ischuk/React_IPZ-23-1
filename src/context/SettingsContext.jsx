@@ -5,32 +5,41 @@ import { saveSettings, loadSettings } from "../utils/storage";
 const SettingsContext = createContext();
 
 export const SettingsProvider = ({ children }) => {
-  const [settings, setSettings] = useState(() => {
-    const saved = loadSettings();
-    return saved || DEFAULT_SETTINGS;
-  });
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    saveSettings(settings);
-  }, [settings]);
+    const init = async () => {
+      const saved = await loadSettings();
+      if (saved) {
+        setSettings(saved);
+      }
+      setIsLoaded(true);
+    };
+    init();
+  }, []);
 
-  const updateSettings = (newSettings) => {
-    setSettings((prev) => ({ ...prev, ...newSettings }));
+  const updateSettings = async (newSettings) => {
+    const updated = { ...settings, ...newSettings };
+    setSettings(updated);
+    await saveSettings(updated);
   };
 
-  const resetSettings = () => {
+  const resetSettings = async () => {
     setSettings(DEFAULT_SETTINGS);
+    await saveSettings(DEFAULT_SETTINGS);
   };
 
   return (
     <SettingsContext.Provider
-      value={{ settings, updateSettings, resetSettings }}
+      value={{ settings, updateSettings, resetSettings, isLoaded }}
     >
       {children}
     </SettingsContext.Provider>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSettings = () => {
   const context = useContext(SettingsContext);
   if (!context) {
