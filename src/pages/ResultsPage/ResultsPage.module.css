@@ -1,19 +1,5 @@
-.resultsPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.container {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 40px 50px;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+.content {
   text-align: center;
-  max-width: 450px;
-  width: 100%;
 }
 
 .trophy {
@@ -101,12 +87,6 @@
 
 .actions {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.actions button {
-  padding: 10px 12px;
-  font-size: 16px;
+  flex-direction: column;
+  gap: 12px;
 }

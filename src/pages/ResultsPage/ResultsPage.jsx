@@ -1,3 +1,4 @@
+import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
 import {
   FaTrophy,
@@ -24,8 +25,8 @@ function ResultsPage({ result, onRestart, onMainMenu }) {
       : "";
 
   return (
-    <div className={styles.resultsPage}>
-      <div className={styles.container}>
+    <Modal isOpen={true} onClose={onRestart}>
+      <div className={styles.content}>
         <div className={styles.trophy}>
           {isCancelled ? <FaBan /> : isDraw ? <FaHandshake /> : <FaTrophy />}
         </div>
@@ -78,7 +79,7 @@ function ResultsPage({ result, onRestart, onMainMenu }) {
           </Button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 

@@ -15,6 +15,8 @@ function App() {
     endGame,
   } = useNavigation();
 
+  const showResults = gameResult !== null;
+
   const renderPage = () => {
     switch (currentPage) {
       case "start":
@@ -25,14 +27,17 @@ function App() {
           />
         );
       case "game":
-        return <GamePage onGameEnd={endGame} />;
-      case "results":
         return (
-          <ResultsPage
-            result={gameResult}
-            onRestart={navigateToGame}
-            onMainMenu={navigateToStart}
-          />
+          <>
+            <GamePage onGameEnd={endGame} />
+            {showResults && (
+              <ResultsPage
+                result={gameResult}
+                onRestart={navigateToGame}
+                onMainMenu={navigateToStart}
+              />
+            )}
+          </>
         );
       case "settings":
         return <SettingsPage onBack={navigateToStart} />;
