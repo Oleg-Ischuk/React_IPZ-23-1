@@ -9,6 +9,7 @@ function App() {
   const {
     currentPage,
     gameResult,
+    userId,
     navigateToGame,
     navigateToStart,
     navigateToSettings,
@@ -29,12 +30,13 @@ function App() {
       case "game":
         return (
           <>
-            <GamePage onGameEnd={endGame} />
+            <GamePage onGameEnd={endGame} userId={userId} />
             {showResults && (
               <ResultsPage
                 result={gameResult}
                 onRestart={navigateToGame}
                 onMainMenu={navigateToStart}
+                userId={userId}
               />
             )}
           </>

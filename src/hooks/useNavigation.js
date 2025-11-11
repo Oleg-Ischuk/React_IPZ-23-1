@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getOrCreateSessionId } from "../utils/generateId";
 
 export const useNavigation = () => {
   const [currentPage, setCurrentPage] = useState("start");
   const [gameResult, setGameResult] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const id = getOrCreateSessionId();
+    setUserId(id);
+  }, []);
 
   const navigateToGame = () => {
     setCurrentPage("game");
@@ -25,6 +32,7 @@ export const useNavigation = () => {
   return {
     currentPage,
     gameResult,
+    userId,
     navigateToGame,
     navigateToStart,
     navigateToSettings,

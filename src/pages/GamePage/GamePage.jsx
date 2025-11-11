@@ -8,7 +8,7 @@ import { useConnectFour, useBoardClick } from "../../hooks";
 import { useSettings } from "../../context";
 import styles from "./GamePage.module.css";
 
-function GamePage({ onGameEnd }) {
+function GamePage({ onGameEnd, userId }) {
   const { board, currentPlayer, moves, winner, gameOver, makeMove } =
     useConnectFour();
   const { handleColumnClick } = useBoardClick(makeMove);
@@ -82,11 +82,11 @@ function GamePage({ onGameEnd }) {
 
   useEffect(() => {
     if (gameOver && winner) {
-      onGameEnd({ winner: winner, moves });
+      onGameEnd({ winner: winner, moves, userId });
     } else if (gameOver && !winner && moves > 0) {
-      onGameEnd({ winner: "draw", moves });
+      onGameEnd({ winner: "draw", moves, userId });
     }
-  }, [gameOver, winner, moves, onGameEnd]);
+  }, [gameOver, winner, moves, onGameEnd, userId]);
 
   const handleCellClick = (row, col) => {
     if (!gameOver && !showTimeoutMessage) {
@@ -104,10 +104,10 @@ function GamePage({ onGameEnd }) {
     }
 
     if (moves === 0) {
-      onGameEnd({ winner: "cancelled", moves: 0 });
+      onGameEnd({ winner: "cancelled", moves: 0, userId });
     } else {
       const winnerPlayer = currentPlayer === "red" ? "yellow" : "red";
-      onGameEnd({ winner: winnerPlayer, moves });
+      onGameEnd({ winner: winnerPlayer, moves, userId });
     }
   };
 
@@ -119,6 +119,10 @@ function GamePage({ onGameEnd }) {
 
   return (
     <div className={styles.gamePage}>
+      <div className={styles.userIdBadge} title={userId}>
+        ID сесії: {userId}
+      </div>
+
       <div className={styles.container}>
         <h1 className={styles.title}>Гра в розпалі</h1>
 
