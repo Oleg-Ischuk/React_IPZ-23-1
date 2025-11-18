@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import StartPage from "./pages/StartPage/StartPage";
 import GamePage from "./pages/GamePage/GamePage";
 import ResultsPage from "./pages/ResultsPage/ResultsPage";
@@ -7,9 +8,7 @@ import styles from "./App.module.css";
 
 function App() {
   const {
-    currentPage,
     gameResult,
-    userId,
     navigateToGame,
     navigateToStart,
     navigateToSettings,
@@ -18,42 +17,49 @@ function App() {
 
   const showResults = gameResult !== null;
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case "start":
-        return (
-          <StartPage
-            onStartGame={navigateToGame}
-            onOpenSettings={navigateToSettings}
-          />
-        );
-      case "game":
-        return (
-          <>
-            <GamePage onGameEnd={endGame} userId={userId} />
-            {showResults && (
-              <ResultsPage
-                result={gameResult}
-                onRestart={navigateToGame}
-                onMainMenu={navigateToStart}
-                userId={userId}
-              />
-            )}
-          </>
-        );
-      case "settings":
-        return <SettingsPage onBack={navigateToStart} />;
-      default:
-        return (
-          <StartPage
-            onStartGame={navigateToGame}
-            onOpenSettings={navigateToSettings}
-          />
-        );
-    }
-  };
-
-  return <div className={styles.app}>{renderPage()}</div>;
+  return (
+    <div className={styles.app}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <StartPage
+              onStartGame={navigateToGame}
+              onOpenSettings={navigateToSettings}
+            />
+          }
+        />
+        <Route
+          path="/game/:userId"
+          element={
+            <>
+              <GamePage onGameEnd={endGame} />
+              {showResults && (
+                <ResultsPage
+                  result={gameResult}
+                  onRestart={navigateToGame}
+                  onMainMenu={navigateToStart}
+                />
+              )}
+            </>
+          }
+        />
+        <Route
+          path="/settings"
+          element={<SettingsPage onBack={navigateToStart} />}
+        />
+        <Route
+          path="*"
+          element={
+            <StartPage
+              onStartGame={navigateToGame}
+              onOpenSettings={navigateToSettings}
+            />
+          }
+        />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

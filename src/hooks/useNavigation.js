@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getOrCreateSessionId } from "../utils/generateId";
 
 export const useNavigation = () => {
-  const [currentPage, setCurrentPage] = useState("start");
+  const navigate = useNavigate();
   const [gameResult, setGameResult] = useState(null);
   const [userId, setUserId] = useState(null);
 
@@ -12,17 +13,19 @@ export const useNavigation = () => {
   }, []);
 
   const navigateToGame = () => {
-    setCurrentPage("game");
     setGameResult(null);
+    if (userId) {
+      navigate(`/game/${userId}?new=${Date.now()}`);
+    }
   };
 
   const navigateToStart = () => {
     setGameResult(null);
-    setCurrentPage("start");
+    navigate("/");
   };
 
   const navigateToSettings = () => {
-    setCurrentPage("settings");
+    navigate("/settings");
   };
 
   const endGame = (result) => {
@@ -30,7 +33,6 @@ export const useNavigation = () => {
   };
 
   return {
-    currentPage,
     gameResult,
     userId,
     navigateToGame,

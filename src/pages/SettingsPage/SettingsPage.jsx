@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import SettingsForm from "../../components/SettingsForm/SettingsForm";
 import { useSettings } from "../../context";
 import styles from "./SettingsPage.module.css";
 
 function SettingsPage({ onBack }) {
+  const navigate = useNavigate();
   const { settings, updateSettings } = useSettings();
 
   const handleSubmit = (values) => {
@@ -10,6 +12,14 @@ function SettingsPage({ onBack }) {
     if (onBack) {
       onBack();
     }
+    navigate("/");
+  };
+
+  const handleCancel = () => {
+    if (onBack) {
+      onBack();
+    }
+    navigate("/");
   };
 
   return (
@@ -18,7 +28,7 @@ function SettingsPage({ onBack }) {
         <SettingsForm
           initialValues={settings}
           onSubmit={handleSubmit}
-          onCancel={onBack}
+          onCancel={handleCancel}
         />
       </div>
     </div>

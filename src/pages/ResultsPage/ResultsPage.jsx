@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
 import {
@@ -14,7 +15,8 @@ import { useSettings } from "../../context";
 import { useState } from "react";
 import styles from "./ResultsPage.module.css";
 
-function ResultsPage({ result, onRestart, onMainMenu, userId }) {
+function ResultsPage({ result, onRestart, onMainMenu }) {
+  const { userId } = useParams();
   const { settings } = useSettings();
   const [copied, setCopied] = useState(false);
   const isDraw = result?.winner === "draw";

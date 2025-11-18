@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import Board from "../../components/Board/Board";
 import GameInfo from "../../components/GameInfo/GameInfo";
 import Button from "../../components/Button/Button";
@@ -8,8 +9,10 @@ import { useConnectFour, useBoardClick } from "../../hooks";
 import { useSettings } from "../../context";
 import styles from "./GamePage.module.css";
 
-function GamePage({ onGameEnd, userId }) {
-  const { board, currentPlayer, moves, winner, gameOver, makeMove } =
+function GamePage({ onGameEnd }) {
+  const { userId } = useParams();
+  const [searchParams] = useSearchParams();
+  const { board, currentPlayer, moves, winner, gameOver, makeMove, resetGame } =
     useConnectFour();
   const { handleColumnClick } = useBoardClick(makeMove);
   const { settings } = useSettings();
@@ -18,6 +21,10 @@ function GamePage({ onGameEnd, userId }) {
   const [skippedPlayer, setSkippedPlayer] = useState(null);
   const timerRef = useRef(null);
   const isSkippingRef = useRef(false);
+
+  useEffect(() => {
+    resetGame();
+  }, [searchParams, resetGame]);
 
   useEffect(() => {
     if (settings.moveTimeLimit === 0 || gameOver) {
