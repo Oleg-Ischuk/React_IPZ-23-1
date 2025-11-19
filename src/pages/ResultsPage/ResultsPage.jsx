@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
 import {
@@ -17,6 +17,7 @@ import styles from "./ResultsPage.module.css";
 
 function ResultsPage({ result, onRestart, onMainMenu }) {
   const { userId } = useParams();
+  const navigate = useNavigate();
   const { settings } = useSettings();
   const [copied, setCopied] = useState(false);
   const isDraw = result?.winner === "draw";
@@ -35,8 +36,22 @@ function ResultsPage({ result, onRestart, onMainMenu }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleRestart = () => {
+    if (onRestart) {
+      onRestart();
+    }
+    navigate(`/game/${userId}?new=${Date.now()}`);
+  };
+
+  const handleMainMenu = () => {
+    if (onMainMenu) {
+      onMainMenu();
+    }
+    navigate("/");
+  };
+
   return (
-    <Modal isOpen={true} onClose={onRestart}>
+    <Modal isOpen={true} onClose={handleMainMenu}>
       <div className={styles.content}>
         <div className={styles.trophy}>
           {isCancelled ? <FaBan /> : isDraw ? <FaHandshake /> : <FaTrophy />}
@@ -96,10 +111,10 @@ function ResultsPage({ result, onRestart, onMainMenu }) {
         {copied && <p className={styles.copiedNotification}>Скопійовано!</p>}
 
         <div className={styles.actions}>
-          <Button onClick={onRestart} variant="primary">
+          <Button onClick={handleRestart} variant="primary">
             <FaRedo /> Грати знову
           </Button>
-          <Button onClick={onMainMenu} variant="secondary">
+          <Button onClick={handleMainMenu} variant="secondary">
             <FaHome /> Головне меню
           </Button>
         </div>
