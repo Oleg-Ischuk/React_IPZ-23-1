@@ -21,9 +21,11 @@ function GamePage({ onGameEnd }) {
   const [skippedPlayer, setSkippedPlayer] = useState(null);
   const timerRef = useRef(null);
   const isSkippingRef = useRef(false);
+  const gameEndedRef = useRef(false);
 
   useEffect(() => {
     resetGame();
+    gameEndedRef.current = false;
   }, [searchParams, resetGame]);
 
   useEffect(() => {
@@ -88,12 +90,16 @@ function GamePage({ onGameEnd }) {
   ]);
 
   useEffect(() => {
-    if (gameOver && winner) {
-      onGameEnd({ winner: winner, moves, userId });
-    } else if (gameOver && !winner && moves > 0) {
-      onGameEnd({ winner: "draw", moves, userId });
+    if (!gameEndedRef.current && gameOver) {
+      gameEndedRef.current = true;
+
+      if (winner) {
+        onGameEnd({ winner: winner, moves, userId });
+      } else if (moves > 0) {
+        onGameEnd({ winner: "draw", moves, userId });
+      }
     }
-  }, [gameOver, winner, moves, onGameEnd, userId]);
+  }, [gameOver, winner, moves, userId, onGameEnd]);
 
   const handleCellClick = (row, col) => {
     if (!gameOver && !showTimeoutMessage) {

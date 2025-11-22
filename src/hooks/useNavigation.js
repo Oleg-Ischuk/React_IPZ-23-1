@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { getOrCreateSessionId } from "../utils/generateId";
 
 export const useNavigation = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [gameResult, setGameResult] = useState(null);
   const [userId, setUserId] = useState(null);
 
@@ -12,25 +13,38 @@ export const useNavigation = () => {
     setUserId(id);
   }, []);
 
-  const navigateToGame = () => {
-    setGameResult(null);
+  useEffect(() => {
+    const result = searchParams.get("result");
+    if (result) {
+      try {
+        setGameResult(JSON.parse(decodeURIComponent(result)));
+      } catch (e) {
+        console.error("Failed to parse game result:", e);
+      }
+    }
+  }, [searchParams]);
+
+  const navigateToGame = useCallback(() => {
     if (userId) {
       navigate(`/game/${userId}?new=${Date.now()}`);
     }
-  };
+  }, [userId, navigate]);
 
-  const navigateToStart = () => {
-    setGameResult(null);
+  const navigateToStart = useCallback(() => {
     navigate("/");
-  };
+  }, [navigate]);
 
-  const navigateToSettings = () => {
+  const navigateToSettings = useCallback(() => {
     navigate("/settings");
-  };
+  }, [navigate]);
 
-  const endGame = (result) => {
-    setGameResult(result);
-  };
+  const endGame = useCallback(
+    (result) => {
+      const resultString = encodeURIComponent(JSON.stringify(result));
+      navigate(`/results/${result.userId}?result=${resultString}`);
+    },
+    [navigate]
+  );
 
   return {
     gameResult,
