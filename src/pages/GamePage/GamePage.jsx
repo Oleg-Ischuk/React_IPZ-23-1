@@ -1,24 +1,37 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import Board from "../../components/Board/Board";
 import GameInfo from "../../components/GameInfo/GameInfo";
 import Button from "../../components/Button/Button";
+import Modal from "../../components/Modal/Modal";
 import { MdExitToApp } from "react-icons/md";
-import { FaHourglassHalf } from "react-icons/fa";
+import {
+  FaHourglassHalf,
+  FaTrophy,
+  FaRedo,
+  FaHome,
+  FaHandshake,
+} from "react-icons/fa";
+import { GiToken } from "react-icons/gi";
 import { useConnectFour, useBoardClick } from "../../hooks";
-import { useSettings } from "../../context";
+import useGameStore from "../../store/gameStore";
+import useResultsStore from "../../store/resultsStore";
+import { generateUUID } from "../../utils/generateId";
 import styles from "./GamePage.module.css";
 
 function GamePage({ onGameEnd }) {
   const { userId } = useParams();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { board, currentPlayer, moves, winner, gameOver, makeMove, resetGame } =
     useConnectFour();
   const { handleColumnClick } = useBoardClick(makeMove);
-  const { settings } = useSettings();
-  const [timeLeft, setTimeLeft] = useState(settings.moveTimeLimit);
+  const { moveTimeLimit, playerOneName, playerTwoName } = useGameStore();
+  const { addResult } = useResultsStore();
+  const [timeLeft, setTimeLeft] = useState(moveTimeLimit);
   const [showTimeoutMessage, setShowTimeoutMessage] = useState(false);
   const [skippedPlayer, setSkippedPlayer] = useState(null);
+  const [showGameOverModal, setShowGameOverModal] = useState(false);
   const timerRef = useRef(null);
   const isSkippingRef = useRef(false);
   const gameEndedRef = useRef(false);
@@ -26,10 +39,11 @@ function GamePage({ onGameEnd }) {
   useEffect(() => {
     resetGame();
     gameEndedRef.current = false;
+    setShowGameOverModal(false);
   }, [searchParams, resetGame]);
 
   useEffect(() => {
-    if (settings.moveTimeLimit === 0 || gameOver) {
+    if (moveTimeLimit === 0 || gameOver) {
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
@@ -41,7 +55,7 @@ function GamePage({ onGameEnd }) {
       return;
     }
 
-    setTimeLeft(settings.moveTimeLimit);
+    setTimeLeft(moveTimeLimit);
 
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -69,7 +83,7 @@ function GamePage({ onGameEnd }) {
               isSkippingRef.current = false;
             }, 2000);
           }
-          return settings.moveTimeLimit;
+          return moveTimeLimit;
         }
         return prev - 1;
       });
@@ -81,31 +95,38 @@ function GamePage({ onGameEnd }) {
         timerRef.current = null;
       }
     };
-  }, [
-    currentPlayer,
-    settings.moveTimeLimit,
-    gameOver,
-    showTimeoutMessage,
-    makeMove,
-  ]);
+  }, [currentPlayer, moveTimeLimit, gameOver, showTimeoutMessage, makeMove]);
 
   useEffect(() => {
     if (!gameEndedRef.current && gameOver) {
       gameEndedRef.current = true;
 
-      if (winner) {
-        onGameEnd({ winner: winner, moves, userId });
-      } else if (moves > 0) {
-        onGameEnd({ winner: "draw", moves, userId });
-      }
+      const gameResult = {
+        winner: winner || "draw",
+        moves,
+        userId,
+        playerOneName,
+        playerTwoName,
+      };
+
+      addResult(gameResult);
+      setShowGameOverModal(true);
     }
-  }, [gameOver, winner, moves, userId, onGameEnd]);
+  }, [
+    gameOver,
+    winner,
+    moves,
+    userId,
+    addResult,
+    playerOneName,
+    playerTwoName,
+  ]);
 
   const handleCellClick = (row, col) => {
     if (!gameOver && !showTimeoutMessage) {
       const success = handleColumnClick(col);
       if (success) {
-        setTimeLeft(settings.moveTimeLimit);
+        setTimeLeft(moveTimeLimit);
       }
     }
   };
@@ -116,19 +137,59 @@ function GamePage({ onGameEnd }) {
       timerRef.current = null;
     }
 
-    if (moves === 0) {
-      onGameEnd({ winner: "cancelled", moves: 0, userId });
-    } else {
-      const winnerPlayer = currentPlayer === "red" ? "yellow" : "red";
-      onGameEnd({ winner: winnerPlayer, moves, userId });
+    const gameResult = {
+      winner: "cancelled",
+      moves: 0,
+      userId,
+      playerOneName,
+      playerTwoName,
+    };
+
+    if (moves > 0) {
+      gameResult.winner = currentPlayer === "red" ? "yellow" : "red";
+      gameResult.moves = moves;
+    }
+
+    addResult(gameResult);
+
+    if (onGameEnd) {
+      onGameEnd(gameResult);
     }
   };
 
+  const handlePlayAgain = () => {
+    const newGameId = generateUUID();
+    setShowGameOverModal(false);
+    navigate(`/game/${newGameId}?new=${Date.now()}`);
+  };
+
+  const handleViewResults = () => {
+    setShowGameOverModal(false);
+    if (onGameEnd) {
+      const gameResult = {
+        winner: winner || "draw",
+        moves,
+        userId,
+        playerOneName,
+        playerTwoName,
+      };
+      onGameEnd(gameResult);
+    }
+  };
+
+  const handleGoHome = () => {
+    setShowGameOverModal(false);
+    navigate("/");
+  };
+
   const skippedPlayerName =
-    skippedPlayer === "red" ? settings.playerOneName : settings.playerTwoName;
+    skippedPlayer === "red" ? playerOneName : playerTwoName;
 
   const currentPlayerName =
-    currentPlayer === "red" ? settings.playerOneName : settings.playerTwoName;
+    currentPlayer === "red" ? playerOneName : playerTwoName;
+
+  const isDraw = winner === null && gameOver;
+  const winnerName = winner === "red" ? playerOneName : playerTwoName;
 
   return (
     <div className={styles.gamePage}>
@@ -158,7 +219,7 @@ function GamePage({ onGameEnd }) {
             <GameInfo
               currentPlayer={currentPlayer}
               moves={moves}
-              timeLeft={settings.moveTimeLimit > 0 ? timeLeft : null}
+              timeLeft={moveTimeLimit > 0 ? timeLeft : null}
             />
 
             <div className={styles.actions}>
@@ -169,6 +230,48 @@ function GamePage({ onGameEnd }) {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={showGameOverModal} onClose={handleViewResults}>
+        <div className={styles.modalContent}>
+          <div className={styles.modalIcon}>
+            {isDraw ? <FaHandshake /> : <FaTrophy />}
+          </div>
+
+          <h2 className={styles.modalTitle}>
+            {isDraw ? "Нічия!" : "Гру завершено!"}
+          </h2>
+
+          {!isDraw && (
+            <div className={styles.modalWinner}>
+              <GiToken className={styles.modalWinnerIcon} />
+              <span>
+                Переможець: <strong>{winnerName}</strong>
+              </span>
+            </div>
+          )}
+
+          <div className={styles.modalStats}>
+            <p>
+              Зроблено ходів: <strong>{moves}</strong>
+            </p>
+            <p>
+              ID сесії: <span className={styles.modalSessionId}>{userId}</span>
+            </p>
+          </div>
+
+          <div className={styles.modalActions}>
+            <Button onClick={handlePlayAgain} variant="primary">
+              <FaRedo /> Грати знову
+            </Button>
+            <Button onClick={handleViewResults} variant="secondary">
+              <FaTrophy /> Переглянути результати
+            </Button>
+            <Button onClick={handleGoHome} variant="secondary">
+              <FaHome /> Головне меню
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

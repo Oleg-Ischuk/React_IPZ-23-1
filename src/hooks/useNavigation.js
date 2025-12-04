@@ -1,17 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { getOrCreateSessionId } from "../utils/generateId";
+import { generateUUID } from "../utils/generateId";
 
 export const useNavigation = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [gameResult, setGameResult] = useState(null);
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    const id = getOrCreateSessionId();
-    setUserId(id);
-  }, []);
 
   useEffect(() => {
     const result = searchParams.get("result");
@@ -25,10 +19,10 @@ export const useNavigation = () => {
   }, [searchParams]);
 
   const navigateToGame = useCallback(() => {
-    if (userId) {
-      navigate(`/game/${userId}?new=${Date.now()}`);
-    }
-  }, [userId, navigate]);
+    const newGameId = generateUUID();
+    console.log("🎮 Створено новий ID для гри:", newGameId);
+    navigate(`/game/${newGameId}?new=${Date.now()}`);
+  }, [navigate]);
 
   const navigateToStart = useCallback(() => {
     navigate("/");
@@ -40,6 +34,7 @@ export const useNavigation = () => {
 
   const endGame = useCallback(
     (result) => {
+      console.log("🏁 Завершення гри з результатом:", result);
       const resultString = encodeURIComponent(JSON.stringify(result));
       navigate(`/results/${result.userId}?result=${resultString}`);
     },
@@ -48,7 +43,6 @@ export const useNavigation = () => {
 
   return {
     gameResult,
-    userId,
     navigateToGame,
     navigateToStart,
     navigateToSettings,

@@ -1,11 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import SettingsForm from "../../components/SettingsForm/SettingsForm";
-import { useSettings } from "../../context";
+import useGameStore from "../../store/gameStore";
 import styles from "./SettingsPage.module.css";
 
 function SettingsPage({ onBack }) {
   const navigate = useNavigate();
-  const { settings, updateSettings } = useSettings();
+  const {
+    difficulty,
+    moveTimeLimit,
+    playerOneName,
+    playerTwoName,
+    updateSettings,
+  } = useGameStore();
 
   const handleSubmit = (values) => {
     updateSettings(values);
@@ -22,11 +28,18 @@ function SettingsPage({ onBack }) {
     navigate("/");
   };
 
+  const initialValues = {
+    difficulty,
+    moveTimeLimit,
+    playerOneName,
+    playerTwoName,
+  };
+
   return (
     <div className={styles.settingsPage}>
       <div className={styles.container}>
         <SettingsForm
-          initialValues={settings}
+          initialValues={initialValues}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
         />

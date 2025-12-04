@@ -106,16 +106,112 @@
   font-size: 22px;
 }
 
-@media (max-width: 768px) {
-  .userIdBadge {
-    top: 10px;
-    right: 10px;
-    padding: 10px 14px;
-    font-size: 12px;
-    max-width: 200px;
-  }
+.modalContent {
+  text-align: center;
+  padding: 20px;
+}
 
-  .title {
-    font-size: 28px;
+.modalIcon {
+  font-size: 80px;
+  color: #ffd700;
+  margin-bottom: 20px;
+  animation: bounceIn 0.6s ease-out;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
   }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modalTitle {
+  font-size: 32px;
+  color: #10b981;
+  margin: 0 0 25px 0;
+  font-weight: 700;
+}
+
+.modalWinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  padding: 15px 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #047857;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.modalWinnerIcon {
+  font-size: 28px;
+  color: #10b981;
+}
+
+.modalWinner strong {
+  color: #059669;
+  font-weight: 700;
+}
+
+.modalStats {
+  background: rgba(132, 250, 176, 0.15);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.modalStats p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.modalStats strong {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.modalSessionId {
+  font-family: "Courier New", monospace;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #059669;
+  font-weight: 600;
+}
+
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.modalActions button {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.modalActions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }

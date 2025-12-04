@@ -5,16 +5,3 @@ export const generateUUID = () => {
     return v.toString(16);
   });
 };
-
-export const getOrCreateSessionId = () => {
-  let sessionId = sessionStorage.getItem("gameSessionId");
-  if (!sessionId) {
-    sessionId = generateUUID();
-    sessionStorage.setItem("gameSessionId", sessionId);
-  }
-  return sessionId;
-};
-
-export const clearSessionId = () => {
-  sessionStorage.removeItem("gameSessionId");
-};

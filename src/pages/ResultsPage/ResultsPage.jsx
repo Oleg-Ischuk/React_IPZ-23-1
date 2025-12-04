@@ -1,51 +1,69 @@
-import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import Button from "../../components/Button/Button";
+import ResultsTable from "../../components/ResultsTable/ResultsTable";
 import {
   FaTrophy,
   FaRedo,
-  FaHashtag,
   FaHandshake,
   FaBan,
   FaHome,
   FaCopy,
 } from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
-import { useSettings } from "../../context";
-import { useState, useEffect } from "react";
+import useGameStore from "../../store/gameStore";
+import useResultsStore from "../../store/resultsStore";
+import { useState } from "react";
+import { generateUUID } from "../../utils/generateId";
 import styles from "./ResultsPage.module.css";
 
 function ResultsPage({ onMainMenu }) {
   const { userId } = useParams();
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { settings } = useSettings();
+  const { playerOneName, playerTwoName } = useGameStore();
+  const { results } = useResultsStore();
   const [copied, setCopied] = useState(false);
-  const [result, setResult] = useState(null);
 
-  // Читаємо результат з URL
+  const currentResult = results.find((r) => r.userId === userId);
+
   useEffect(() => {
-    const resultParam = searchParams.get("result");
-    if (resultParam) {
-      try {
-        setResult(JSON.parse(decodeURIComponent(resultParam)));
-      } catch (e) {
-        console.error("Failed to parse result:", e);
-      }
+    if (!currentResult) {
+      const timer = setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      return () => clearTimeout(timer);
     }
-  }, [searchParams]);
+  }, [currentResult, navigate]);
 
-  if (!result) {
-    return null;
+  if (!currentResult) {
+    return (
+      <div className={styles.resultsPage}>
+        <div className={styles.notFoundContainer}>
+          <div className={styles.notFoundContent}>
+            <h1 className={styles.notFoundTitle}>Результат не знайдено</h1>
+            <p className={styles.notFoundMessage}>
+              Результат був видалений або сторінка закрилась
+            </p>
+            <p className={styles.redirectMessage}>
+              Перенаправлення на головне меню через 2 секунди...
+            </p>
+            <Button onClick={() => navigate("/")} variant="primary">
+              <FaHome /> Повернутися на головне меню
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  const isDraw = result.winner === "draw";
-  const isCancelled = result.winner === "cancelled";
+  const isDraw = currentResult.winner === "draw";
+  const isCancelled = currentResult.winner === "cancelled";
 
   const winnerName =
-    result.winner === "red"
-      ? settings.playerOneName
-      : result.winner === "yellow"
-      ? settings.playerTwoName
+    currentResult.winner === "red"
+      ? playerOneName
+      : currentResult.winner === "yellow"
+      ? playerTwoName
       : "";
 
   const handleCopyId = () => {
@@ -55,7 +73,9 @@ function ResultsPage({ onMainMenu }) {
   };
 
   const handleRestart = () => {
-    navigate(`/game/${userId}?new=${Date.now()}`);
+    const newGameId = generateUUID();
+    console.log("🔄 Перезапуск гри з НОВИМ ID:", newGameId);
+    navigate(`/game/${newGameId}?new=${Date.now()}`);
   };
 
   const handleMainMenu = () => {
@@ -86,7 +106,9 @@ function ResultsPage({ onMainMenu }) {
                 <span className={styles.label}>
                   <GiToken /> Переможець:
                 </span>
-                <span className={`${styles.winner} ${styles[result.winner]}`}>
+                <span
+                  className={`${styles.winner} ${styles[currentResult.winner]}`}
+                >
                   <GiToken />
                   {winnerName}
                 </span>
@@ -96,9 +118,9 @@ function ResultsPage({ onMainMenu }) {
             {!isCancelled && (
               <div className={styles.resultItem}>
                 <span className={styles.label}>
-                  <FaHashtag /> Зроблено ходів:
+                  <FaTrophy /> Зроблено ходів:
                 </span>
-                <span className={styles.value}>{result.moves || 0}</span>
+                <span className={styles.value}>{currentResult.moves || 0}</span>
               </div>
             )}
 
@@ -134,6 +156,8 @@ function ResultsPage({ onMainMenu }) {
             </Button>
           </div>
         </div>
+
+        <ResultsTable />
       </div>
     </div>
   );

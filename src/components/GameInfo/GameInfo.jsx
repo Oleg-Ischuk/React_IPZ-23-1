@@ -1,13 +1,12 @@
 import { FaUser, FaHashtag, FaClock } from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
-import { useSettings } from "../../context";
+import useGameStore from "../../store/gameStore";
 import styles from "./GameInfo.module.css";
 
 function GameInfo({ currentPlayer, moves, timeLeft }) {
-  const { settings } = useSettings();
+  const { playerOneName, playerTwoName } = useGameStore();
 
-  const playerName =
-    currentPlayer === "red" ? settings.playerOneName : settings.playerTwoName;
+  const playerName = currentPlayer === "red" ? playerOneName : playerTwoName;
 
   return (
     <div className={styles.gameInfo}>

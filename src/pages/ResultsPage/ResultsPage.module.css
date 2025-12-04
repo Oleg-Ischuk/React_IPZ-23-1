@@ -10,15 +10,18 @@
 
 .container {
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.content {
   background: white;
   border-radius: 30px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  border: none;
-}
-
-.content {
   padding: 50px 40px;
   text-align: center;
 }
@@ -237,110 +240,40 @@
   transform: translateY(0);
 }
 
-/* Responsive дизайн */
-@media (max-width: 768px) {
-  .content {
-    padding: 40px 30px;
-  }
-
-  .trophy {
-    font-size: 80px;
-    margin-bottom: 25px;
-  }
-
-  .title {
-    font-size: 32px;
-    margin-bottom: 40px;
-  }
-
-  .resultInfo {
-    padding: 25px;
-  }
-
-  .resultItem {
-    padding: 15px 0;
-  }
-
-  .label {
-    font-size: 16px;
-  }
-
-  .value {
-    font-size: 24px;
-  }
-
-  .winner {
-    font-size: 18px;
-    padding: 8px 16px;
-  }
-
-  .sessionInfo {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .sessionId {
-    min-width: unset;
-    padding: 12px;
-    background: #f0fdf4;
-    border-radius: 8px;
-  }
-
-  .copiedNotification {
-    bottom: 20px;
-    right: 20px;
-  }
+.notFoundContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (max-width: 480px) {
-  .resultsPage {
-    padding: 16px;
-  }
+.notFoundContent {
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 60px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
 
-  .container {
-    border-radius: 20px;
-  }
+.notFoundTitle {
+  font-size: 36px;
+  color: #ef4444;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+}
 
-  .content {
-    padding: 30px 20px;
-  }
+.notFoundMessage {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+}
 
-  .trophy {
-    font-size: 70px;
-    margin-bottom: 20px;
-  }
-
-  .title {
-    font-size: 28px;
-    margin-bottom: 35px;
-  }
-
-  .resultInfo {
-    padding: 20px;
-  }
-
-  .resultItem {
-    padding: 12px 0;
-  }
-
-  .label {
-    font-size: 15px;
-  }
-
-  .value {
-    font-size: 22px;
-  }
-
-  .actions button {
-    padding: 14px 24px;
-    font-size: 16px;
-  }
-
-  .sessionLabel {
-    font-size: 13px;
-  }
-
-  .sessionId {
-    font-size: 11px;
-  }
+.redirectMessage {
+  font-size: 14px;
+  color: #999;
+  margin: 0 0 30px 0;
+  font-style: italic;
 }

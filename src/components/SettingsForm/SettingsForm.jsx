@@ -14,6 +14,7 @@ function SettingsForm({ initialValues, onSubmit, onCancel }) {
       initialValues={initialValues}
       validationSchema={settingsValidationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       {({ errors, touched, values, setFieldValue }) => (
         <Form className={styles.form}>

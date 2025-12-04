@@ -1,12 +1,12 @@
 import { useState, useCallback } from "react";
-import { useSettings } from "../context";
+import useGameStore from "../store/gameStore";
 import { DIFFICULTY_LEVELS } from "../constants/gameSettings";
 
 export const useConnectFour = () => {
-  const { settings } = useSettings();
-  const difficulty = DIFFICULTY_LEVELS[settings.difficulty.toUpperCase()];
-  const ROWS = difficulty.rows;
-  const COLS = difficulty.cols;
+  const { difficulty } = useGameStore();
+  const difficultyLevel = DIFFICULTY_LEVELS[difficulty.toUpperCase()];
+  const ROWS = difficultyLevel.rows;
+  const COLS = difficultyLevel.cols;
 
   const [board, setBoard] = useState(() =>
     Array(ROWS)
