@@ -19,7 +19,7 @@ import useResultsStore from "../../store/resultsStore";
 import { generateUUID } from "../../utils/generateId";
 import styles from "./GamePage.module.css";
 
-function GamePage({ onGameEnd }) {
+function GamePage() {
   const { userId } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -151,10 +151,7 @@ function GamePage({ onGameEnd }) {
     }
 
     addResult(gameResult);
-
-    if (onGameEnd) {
-      onGameEnd(gameResult);
-    }
+    navigate("/results");
   };
 
   const handlePlayAgain = () => {
@@ -165,16 +162,7 @@ function GamePage({ onGameEnd }) {
 
   const handleViewResults = () => {
     setShowGameOverModal(false);
-    if (onGameEnd) {
-      const gameResult = {
-        winner: winner || "draw",
-        moves,
-        userId,
-        playerOneName,
-        playerTwoName,
-      };
-      onGameEnd(gameResult);
-    }
+    navigate("/results");
   };
 
   const handleGoHome = () => {

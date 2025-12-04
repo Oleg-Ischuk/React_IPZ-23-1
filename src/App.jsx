@@ -7,7 +7,7 @@ import { useNavigation } from "./hooks";
 import styles from "./App.module.css";
 
 function App() {
-  const { navigateToGame, navigateToStart, navigateToSettings, endGame } =
+  const { navigateToGame, navigateToStart, navigateToSettings } =
     useNavigation();
 
   return (
@@ -22,12 +22,9 @@ function App() {
             />
           }
         />
+        <Route path="/game/:userId" element={<GamePage />} />
         <Route
-          path="/game/:userId"
-          element={<GamePage onGameEnd={endGame} />}
-        />
-        <Route
-          path="/results/:userId"
+          path="/results"
           element={<ResultsPage onMainMenu={navigateToStart} />}
         />
         <Route
