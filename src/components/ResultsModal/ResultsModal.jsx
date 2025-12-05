@@ -1,6 +1,7 @@
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import Button from "../Button/Button";
-import { FaTrophy, FaRedo, FaHome, FaHandshake } from "react-icons/fa";
+import { FaTrophy, FaRedo, FaHome, FaHandshake, FaCopy } from "react-icons/fa";
 import { GiToken } from "react-icons/gi";
 import styles from "./ResultsModal.module.css";
 
@@ -15,6 +16,14 @@ function ResultsModal({
   onViewResults,
   onGoHome,
 }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyId = () => {
+    navigator.clipboard.writeText(userId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.modalContent}>
@@ -39,10 +48,20 @@ function ResultsModal({
           <p>
             Зроблено ходів: <strong>{moves}</strong>
           </p>
-          <p>
-            ID сесії: <span className={styles.modalSessionId}>{userId}</span>
-          </p>
+          <div className={styles.sessionInfo}>
+            <span className={styles.sessionLabel}>ID сесії:</span>
+            <span className={styles.modalSessionId}>{userId}</span>
+            <button
+              className={styles.copyButton}
+              onClick={handleCopyId}
+              title="Копіювати ID"
+            >
+              <FaCopy />
+            </button>
+          </div>
         </div>
+
+        {copied && <p className={styles.copiedNotification}>Скопійовано!</p>}
 
         <div className={styles.modalActions}>
           <Button onClick={onPlayAgain} variant="primary">
