@@ -3,16 +3,9 @@ import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import Board from "../../components/Board/Board";
 import GameInfo from "../../components/GameInfo/GameInfo";
 import Button from "../../components/Button/Button";
-import Modal from "../../components/Modal/Modal";
+import ResultsModal from "../../components/ResultsModal/ResultsModal";
 import { MdExitToApp } from "react-icons/md";
-import {
-  FaHourglassHalf,
-  FaTrophy,
-  FaRedo,
-  FaHome,
-  FaHandshake,
-} from "react-icons/fa";
-import { GiToken } from "react-icons/gi";
+import { FaHourglassHalf } from "react-icons/fa";
 import { useConnectFour, useBoardClick } from "../../hooks";
 import useGameStore from "../../store/gameStore";
 import useResultsStore from "../../store/resultsStore";
@@ -170,6 +163,11 @@ function GamePage() {
     navigate("/");
   };
 
+  const handleCloseModal = () => {
+    setShowGameOverModal(false);
+    navigate("/results");
+  };
+
   const skippedPlayerName =
     skippedPlayer === "red" ? playerOneName : playerTwoName;
 
@@ -219,47 +217,17 @@ function GamePage() {
         </div>
       </div>
 
-      <Modal isOpen={showGameOverModal} onClose={handleViewResults}>
-        <div className={styles.modalContent}>
-          <div className={styles.modalIcon}>
-            {isDraw ? <FaHandshake /> : <FaTrophy />}
-          </div>
-
-          <h2 className={styles.modalTitle}>
-            {isDraw ? "Нічия!" : "Гру завершено!"}
-          </h2>
-
-          {!isDraw && (
-            <div className={styles.modalWinner}>
-              <GiToken className={styles.modalWinnerIcon} />
-              <span>
-                Переможець: <strong>{winnerName}</strong>
-              </span>
-            </div>
-          )}
-
-          <div className={styles.modalStats}>
-            <p>
-              Зроблено ходів: <strong>{moves}</strong>
-            </p>
-            <p>
-              ID сесії: <span className={styles.modalSessionId}>{userId}</span>
-            </p>
-          </div>
-
-          <div className={styles.modalActions}>
-            <Button onClick={handlePlayAgain} variant="primary">
-              <FaRedo /> Грати знову
-            </Button>
-            <Button onClick={handleViewResults} variant="secondary">
-              <FaTrophy /> Переглянути результати
-            </Button>
-            <Button onClick={handleGoHome} variant="secondary">
-              <FaHome /> Головне меню
-            </Button>
-          </div>
-        </div>
-      </Modal>
+      <ResultsModal
+        isOpen={showGameOverModal}
+        onClose={handleCloseModal}
+        isDraw={isDraw}
+        winnerName={winnerName}
+        moves={moves}
+        userId={userId}
+        onPlayAgain={handlePlayAgain}
+        onViewResults={handleViewResults}
+        onGoHome={handleGoHome}
+      />
     </div>
   );
 }
