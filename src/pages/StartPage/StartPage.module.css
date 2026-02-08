@@ -1,0 +1,83 @@
+.startPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.title {
+  font-size: 48px;
+  color: #10b981;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #888;
+  margin: 0 0 35px 0;
+  font-style: italic;
+}
+
+.rules {
+  background: rgba(132, 250, 176, 0.2);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  text-align: left;
+  border: 2px solid rgba(132, 250, 176, 0.4);
+}
+
+.rules h3 {
+  margin: 0 0 15px 0;
+  color: #10b981;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rules ul {
+  margin: 0;
+  padding-left: 25px;
+  list-style: none;
+}
+
+.rules li {
+  margin-bottom: 12px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.rules li::before {
+  content: "✓";
+  position: absolute;
+  left: -25px;
+  color: #84fab0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.rules li:last-child {
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

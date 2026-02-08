@@ -1,0 +1,18 @@
+.board {
+  background: #0d7377;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  border: 3px solid #14a085;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}

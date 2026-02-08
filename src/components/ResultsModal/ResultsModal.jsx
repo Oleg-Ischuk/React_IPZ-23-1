@@ -1,0 +1,82 @@
+import { useState } from "react";
+import Modal from "../Modal/Modal";
+import Button from "../Button/Button";
+import { FaTrophy, FaRedo, FaHome, FaHandshake, FaCopy } from "react-icons/fa";
+import { GiToken } from "react-icons/gi";
+import styles from "./ResultsModal.module.css";
+
+function ResultsModal({
+  isOpen,
+  onClose,
+  isDraw,
+  winnerName,
+  moves,
+  userId,
+  onPlayAgain,
+  onViewResults,
+  onGoHome,
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyId = () => {
+    navigator.clipboard.writeText(userId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <div className={styles.modalContent}>
+        <div className={styles.modalIcon}>
+          {isDraw ? <FaHandshake /> : <FaTrophy />}
+        </div>
+
+        <h2 className={styles.modalTitle}>
+          {isDraw ? "Нічия!" : "Гру завершено!"}
+        </h2>
+
+        {!isDraw && (
+          <div className={styles.modalWinner}>
+            <GiToken className={styles.modalWinnerIcon} />
+            <span>
+              Переможець: <strong>{winnerName}</strong>
+            </span>
+          </div>
+        )}
+
+        <div className={styles.modalStats}>
+          <p>
+            Зроблено ходів: <strong>{moves}</strong>
+          </p>
+          <div className={styles.sessionInfo}>
+            <span className={styles.sessionLabel}>ID сесії:</span>
+            <span className={styles.modalSessionId}>{userId}</span>
+            <button
+              className={styles.copyButton}
+              onClick={handleCopyId}
+              title="Копіювати ID"
+            >
+              <FaCopy />
+            </button>
+          </div>
+        </div>
+
+        {copied && <p className={styles.copiedNotification}>Скопійовано!</p>}
+
+        <div className={styles.modalActions}>
+          <Button onClick={onPlayAgain} variant="primary">
+            <FaRedo /> Грати знову
+          </Button>
+          <Button onClick={onViewResults} variant="secondary">
+            <FaTrophy /> Переглянути результати
+          </Button>
+          <Button onClick={onGoHome} variant="secondary">
+            <FaHome /> Головне меню
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+export default ResultsModal;
