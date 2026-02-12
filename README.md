@@ -34,7 +34,7 @@ npm install
 - `npm run build` — збірка для продакшену
 - `npm run preview` — локальний перегляд збірки
 - `npm run lint` — перевірка коду ESLint
--- `npm run license-check` — згенерувати `license-report.csv` (використовує `license-checker`). Після генерації я створюю `license-report.md` з людино-зрозумілим форматом.
+  -- `npm run license-check` — згенерувати `license-report.csv` (використовує `license-checker`). Після генерації я створюю `license-report.md` з людино-зрозумілим форматом.
 - `npm run docs` — згенерувати документацію JSDoc (вивід у `out/docs`)
 - `npm run storybook` — запустити Storybook (після встановлення залежностей Storybook)
 - `npm run build-storybook` — побудувати Storybook статично
@@ -63,17 +63,13 @@ npm run storybook
 npm run docs
 ```
 
-Додати відео в локальну документацію
-
-Якщо немає публічного хостингу для відео — помістіть файл `demo.mp4` у `docs/media/` і вставте його в `docs/VIDEO.md` згідно інструкції.
-
 Cookie / GDPR
 
 Додано компонент cookie-попап: `src/components/CookieConsent/CookieConsent.jsx`. За замовчуванням вибір зберігається в `localStorage`. Оновіть `PRIVACY_POLICY.md` та поведінку компонента при додаванні аналітики.
 
 Звіт по ліцензіях
 
-Команда `npm run license-check` створює `license-report.csv` з інформацією про ліцензії залежностей. Перевірте наявність несумісних ліцензій і за потреби замініть пакети.
+Команда `npm run license-check` створює `license-report.md` з інформацією про ліцензії залежностей. Перевірте наявність несумісних ліцензій і за потреби замініть пакети.
 
 Контакти та внесок
 
@@ -88,7 +84,7 @@ Contributing
 
 Додатково
 
-- Документи та плейсхолдери медіа: `docs/VIDEO.md`, `docs/media/README.txt`.
+- Документи та плейсхолдери медіа: (локальні відео не включені у репозиторій)
 - Згенерована документація JSDoc доступна у `out/docs`.
 
 Потрібно, щоб я зараз встановив і запустив Storybook локально або запушив зміни у віддалений репозиторій? Скажіть, що віддати перевагу.
