@@ -1,0 +1,33 @@
+# Звіт по ліцензіях залежностей
+
+Нижче наведено список встановлених пакетів та їх ліцензій (згенеровано за допомогою `license-checker`). Перевірте сумісність ліцензій перед публічним розповсюдженням.
+
+| Модуль | Ліцензія | Репозиторій |
+|---|---|---|
+| @types/hoist-non-react-statics@3.3.7 | MIT | https://github.com/DefinitelyTyped/DefinitelyTyped |
+| @types/react@19.1.13 | MIT | https://github.com/DefinitelyTyped/DefinitelyTyped |
+| cookie@1.1.1 | MIT | https://github.com/jshttp/cookie |
+| csstype@3.1.3 | MIT | https://github.com/frenic/csstype |
+| deepmerge@2.2.1 | MIT | https://github.com/KyleAMathews/deepmerge |
+| formik@2.4.6 | Apache-2.0 | https://github.com/jaredpalmer/formik |
+| hoist-non-react-statics@3.3.2 | BSD-3-Clause | https://github.com/mridgway/hoist-non-react-statics |
+| lodash-es@4.17.23 | MIT | https://github.com/lodash/lodash |
+| lodash@4.17.23 | MIT | https://github.com/lodash/lodash |
+| property-expr@2.0.6 | MIT | https://github.com/jquense/expr |
+| react-dom@19.1.1 | MIT | https://github.com/facebook/react |
+| react-fast-compare@2.0.4 | MIT | https://github.com/FormidableLabs/react-fast-compare |
+| react-icons@5.5.0 | MIT | https://github.com/react-icons/react-icons |
+| react-ipz-23-1@0.0.0 | UNLICENSED |  |
+| react-is@16.13.1 | MIT | https://github.com/facebook/react |
+| react-router-dom@7.13.0 | MIT | https://github.com/remix-run/react-router |
+| react-router@7.13.0 | MIT | https://github.com/remix-run/react-router |
+| react@19.1.1 | MIT | https://github.com/facebook/react |
+| scheduler@0.26.0 | MIT | https://github.com/facebook/react |
+| set-cookie-parser@2.7.2 | MIT | https://github.com/nfriedly/set-cookie-parser |
+| tiny-case@1.0.3 | MIT | https://github.com/jquense/tiny-case |
+| tiny-warning@1.0.3 | MIT | https://github.com/alexreardon/tiny-warning |
+| toposort@2.0.2 | MIT | https://github.com/marcelklehr/toposort |
+| tslib@2.8.1 | 0BSD | https://github.com/Microsoft/tslib |
+| type-fest@2.19.0 | (MIT OR CC0-1.0) | https://github.com/sindresorhus/type-fest |
+| yup@1.7.1 | MIT | https://github.com/jquense/yup |
+| zustand@5.0.9 | MIT | https://github.com/pmndrs/zustand |
