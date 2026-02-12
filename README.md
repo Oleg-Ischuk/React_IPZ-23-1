@@ -1,16 +1,43 @@
-# React + Vite
+# React IPZ Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Короткий опис: навчальний проект (React) для предмету КОП.
 
-Currently, two official plugins are available:
+Автор: Project Author (обновите в файле при необхідності)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Быстрый старт
 
-## React Compiler
+Установить зависимости:
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+```bash
+npm install
+```
 
-## Expanding the ESLint configuration
+Запустить в режиме разработки:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run dev
+```
+
+Построить:
+
+```bash
+npm run build
+```
+
+Запустить preview:
+
+```bash
+npm run preview
+```
+
+Проверка лицензий зависимостей (генерирует `license-report.csv`):
+
+```bash
+npm run license-check
+```
+
+Storybook и документация настраиваются отдельно (см. `docs/` и `.storybook` после настройки).
+
+Лицензия: MIT — см. `LICENSE`.
+
+Авторские права и контакты: обновите поле `Author` при необхідності.

@@ -5,6 +5,7 @@ import ResultsPage from "./pages/ResultsPage/ResultsPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import { useNavigation } from "./hooks";
 import styles from "./App.module.css";
+import CookieConsent from "./components/CookieConsent/CookieConsent";
 
 function App() {
   const { navigateToGame, navigateToStart, navigateToSettings } =
@@ -41,6 +42,7 @@ function App() {
           }
         />
       </Routes>
+      <CookieConsent />
     </div>
   );
 }
