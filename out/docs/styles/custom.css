@@ -1,0 +1,26 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+#main {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+h1.page-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+article {
+  line-height: 1.6;
+}
+nav {
+  background: #f7f7f9;
+  padding: 12px;
+  border-radius: 8px;
+}
+pre.prettyprint {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 12px;
+  border-radius: 6px;
+}
