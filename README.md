@@ -1,86 +1,115 @@
 # React IPZ Project
 
-Короткий опис
+# React Connect Four — Навчальний проєкт
 
-Навчальний проект на React для предмету КОП. Містить реалізацію гри чотири в ряд(Connect-four), UI-компоненти та інструменти для документації й тестування компонентів.
+Коштовний невеликий проєкт на React: реалізація гри "Чотири в ряд" (Connect Four) з компонентною архітектурою, Storybook та JSDoc-документацією.
 
-Автор Oleh Ishchuk
+**Автор:** Oleh Ishchuk (<olegischuk594@gmail.com>)
 
-Project Oleg-Ischuk <olegischuk594@gmail.com>
+---
 
-Ліцензія
+**Швидкий старт**
 
-Проєкт розповсюджується під ліцензією MIT — див. файл [LICENSE](LICENSE).
-
-Також у корені проєкту згенеровано звіт по ліцензіях залежностей — [license-report.txt](license-report.txt).
-
-Політика конфіденційності
-
-- Політика: [PRIVACY_POLICY.md](PRIVACY_POLICY.md)
-
-Вимоги
-
-- Node.js 18+ та npm
-
-Встановлення
+- **Вимоги:** Node.js 18+ та npm
+- Встановлення залежностей:
 
 ```bash
 npm install
 ```
 
-Основні команди
+- Запуск у режимі розробки:
 
-- `npm run dev` — запуск застосунку в режимі розробки (Vite)
-- `npm run build` — збірка для продакшену
-- `npm run preview` — локальний перегляд збірки
+```bash
+npm run dev
+```
+
+- Збірка для продакшену:
+
+```bash
+npm run build
+```
+
+- Локальний перегляд збірки:
+
+```bash
+npm run preview
+```
+
+---
+
+**Ключові команди**
+
+- `npm run dev` — запуск застосунку (Vite)
+- `npm run build` — продакшен-збірка
+- `npm run preview` — перегляд збірки локально
 - `npm run lint` — перевірка коду ESLint
-- `npm run license-check` — згенерувати `license-report.txt` (використовує `license-checker` і скрипт конвертації). Після виконання у корені з'явиться `license-report.txt`.
 - `npm run docs` — згенерувати документацію JSDoc (вивід у `out/docs`)
-- `npm run storybook` — запустити Storybook (після встановлення залежностей Storybook)
+- `npm run storybook` — запустити Storybook
+- `npm run license-check` — згенерувати звіт ліцензій (`license-report.txt`)
 
-Storybook
-
-У проєкт додано базову конфігурацію Storybook у папці `.storybook` і історії для компонентів `Button` та `Modal` у `src/components/*/*.stories.jsx`.
-
-Перед запуском Storybook встановіть dev-залежності:
+> Зауваження: перед запуском Storybook може знадобитися встановити dev-залежності:
 
 ```bash
 npm install --save-dev @storybook/react-vite @storybook/addon-essentials
 ```
 
-Запуск:
+---
 
-```bash
-npm run storybook
-```
+**Опис проєкту**
 
-Документація
+Проєкт містить:
 
-Конфігурація JSDoc знаходиться в `jsdoc.json`. За замовчуванням документація генерується в `out/docs` командою:
+- Логіку гри та інтерфейс: компоненти в `src/components` та сторінки в `src/pages`.
+- Хуки для логіки гри у `src/hooks`.
+- Зберігання стану в `src/store`.
+- Компоненти: `Board`, `Cell`, `Button`, `Modal`, `ResultsTable`, `CookieConsent` тощо.
 
-```bash
-npm run docs
-```
+Код організовано для зручності розробки та розширення — додавайте історії Storybook і тести для нових компонентів.
 
-Cookie / GDPR
+---
 
-Додано компонент cookie-попап: `src/components/CookieConsent/CookieConsent.jsx`. За замовчуванням вибір зберігається в `localStorage`. Оновіть `PRIVACY_POLICY.md` та поведінку компонента при додаванні аналітики.
+**Структура (коротко)**
 
-Звіт по ліцензіях
+- `src/components/` — UI-компоненти
+- `src/pages/` — сторінки додатку
+- `src/hooks/` — користувацькі хуки
+- `src/store/` — простий state management
+- `src/utils/` — утиліти
 
-Команда `npm run license-check` створює `license-report.txt` з інформацією про ліцензії залежностей. Перевірте наявність несумісних ліцензій і за потреби замініть пакети.
+---
 
-Контакти та внесок
+**Cookie / Конфіденційність**
 
-Якщо хочете додати зміни або оновити автора — змініть секцію `Author` вище та відкрийте PR.
+Компонент згоди на cookie знаходиться в `src/components/CookieConsent/CookieConsent.jsx` і зберігає вибір у `localStorage`. Перегляньте `PRIVACY_POLICY.md` для деталей.
 
-Contributing
+---
+
+**Документація та Storybook**
+
+- JSDoc: конфігурація в `jsdoc.json`, генерація в `out/docs` командою `npm run docs`.
+- Storybook: історії знаходяться поруч з компонентами у `src/components/*/*.stories.jsx`.
+
+---
+
+**Ліцензія**
+
+Проєкт поширюється під ліцензією MIT — див. файл [LICENSE](LICENSE).
+
+Звіт по ліцензіях залежностей: `license-report.txt` (згенерований командою `npm run license-check`).
+
+---
+
+**Внесок**
 
 1. Форкніть репозиторій
 2. Створіть гілку `feature/your-feature`
-3. Внесіть зміни і додайте тести/історії
-4. Відкрийте pull request
+3. Додайте зміни, тести та/або історії
+4. Відкрийте Pull Request
 
-Додатково
+---
 
-- Згенерована документація JSDoc доступна у `out/docs`.
+**Контакти**
+
+Oleh Ishchuk — olegischuk594@gmail.com
+
+Дякую за перегляд — якщо хочете, можу також створити коротку секцію з інструкцією для розробників (git hooks, формат комітів, запуск тестів).
