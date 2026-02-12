@@ -1,171 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8">
     <title>JSDoc: Home</title>
 
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="styles/prettify-tomorrow.css"
-    />
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
-    <link type="text/css" rel="stylesheet" href="styles/custom.css" />
-  </head>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
 
-  <body>
-    <div id="main">
-      <h1 class="page-title">Home</h1>
+<body>
 
-      <h3></h3>
+<div id="main">
 
-      <section>
-        <article>
-          <h1>React IPZ Project</h1>
-          <p>Короткий опис</p>
-          <p>
-            Навчальний проект на React для предмету КОП. Містить реалізацію гри
-            чотири в ряд(Connect-four), UI-компоненти та інструменти для
-            документації й тестування компонентів.
-          </p>
-          <p>Автор</p>
-          <p>
-            Project Oleg-Ischuk
-            <a href="mailto:olegischuk594@gmail.com">olegischuk594@gmail.com</a>
-          </p>
-          <p>Ліцензія</p>
-          <p>
-            Проєкт розповсюджується під ліцензією MIT — див. файл
-            <a href="LICENSE">LICENSE</a>.
-          </p>
-          <p>
-            Також у корені проєкту згенеровано звіт по ліцензіях залежностей
-            <code>license-report.txt</code>.
-          </p>
-          <p>Політика конфіденційності</p>
-          <ul>
-            <li>Політика: <a href="PRIVACY_POLICY.md">PRIVACY_POLICY.md</a></li>
-          </ul>
-          <p>Вимоги</p>
-          <ul>
-            <li>Node.js 18+ та npm</li>
-          </ul>
-          <p>Встановлення</p>
-          <pre class="prettyprint source lang-bash"><code>npm install
-          </code></pre>
-          <p>Основні команди</p>
-          <ul>
-            <li>
-              <code>npm run dev</code> — запуск застосунку в режимі розробки
-              (Vite)
-            </li>
-            <li><code>npm run build</code> — збірка для продакшену</li>
-            <li><code>npm run preview</code> — локальний перегляд збірки</li>
-            <li><code>npm run lint</code> — перевірка коду ESLint</li>
-            <li>
-              <code>npm run license-check</code> — згенерувати
-              <code>license-report.txt</code> (використовує
-              <code>license-checker</code> і скрипт конвертації). Після
-              виконання у корені з'явиться <code>license-report.txt</code>.
-            </li>
-            <li>
-              <code>npm run docs</code> — згенерувати документацію JSDoc (вивід
-              у <code>out/docs</code>)
-            </li>
-            <li>
-              <code>npm run storybook</code> — запустити Storybook (після
-              встановлення залежностей Storybook)
-            </li>
-            <li>
-              <code>npm run build-storybook</code> — побудувати Storybook
-              статично
-            </li>
-          </ul>
-          <p>Storybook</p>
-          <p>
-            У проєкт додано базову конфігурацію Storybook у папці
-            <code>.storybook</code> і історії для компонентів
-            <code>Button</code> та <code>Modal</code> у
-            <code>src/components/*/*.stories.jsx</code>.
-          </p>
-          <p>Перед запуском Storybook встановіть dev-залежності:</p>
-          <pre
-            class="prettyprint source lang-bash"
-          ><code>npm install --save-dev @storybook/react-vite @storybook/addon-essentials
-          </code></pre>
-          <p>Запуск:</p>
-          <pre class="prettyprint source lang-bash"><code>npm run storybook
-          </code></pre>
-          <p>Документація</p>
-          <p>
-            Конфігурація JSDoc знаходиться в <code>jsdoc.json</code>. За
-            замовчуванням документація генерується в
-            <code>out/docs</code> командою:
-          </p>
-          <pre class="prettyprint source lang-bash"><code>npm run docs
-          </code></pre>
-          <p>Cookie / GDPR</p>
-          <p>
-            Додано компонент cookie-попап:
-            <code>src/components/CookieConsent/CookieConsent.jsx</code>. За
-            замовчуванням вибір зберігається в <code>localStorage</code>.
-            Оновіть <code>PRIVACY_POLICY.md</code> та поведінку компонента при
-            додаванні аналітики.
-          </p>
-          <p>Звіт по ліцензіях</p>
-          <p>
-            Команда <code>npm run license-check</code> створює
-            <code>license-report.txt</code> з інформацією про ліцензії
-            залежностей. Перевірте наявність несумісних ліцензій і за потреби
-            замініть пакети.
-          </p>
-          <p>Контакти та внесок</p>
-          <p>
-            Якщо хочете додати зміни або оновити автора — змініть секцію
-            <code>Author</code> вище та відкрийте PR.
-          </p>
-          <p>Contributing</p>
-          <ol>
-            <li>Форкніть репозиторій</li>
-            <li>Створіть гілку <code>feature/your-feature</code></li>
-            <li>Внесіть зміни і додайте тести/історії</li>
-            <li>Відкрийте pull request</li>
-          </ol>
-          <p>Додатково</p>
-          <ul>
-            <li>
-              Згенерована документація JSDoc доступна у <code>out/docs</code>.
-            </li>
-          </ul>
-        </article>
-      </section>
-    </div>
+    <h1 class="page-title">Home</h1>
 
-    <nav>
-      <h2><a href="index.html">Home</a></h2>
-      <h3>Global</h3>
-      <ul>
-        <li><a href="global.html#Button">Button</a></li>
-        <li><a href="global.html#Modal">Modal</a></li>
-      </ul>
-    </nav>
+    
 
-    <br class="clear" />
 
-    <footer>
-      Documentation generated by
-      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 12
-      2026 15:37:06 GMT+0100 (за центральноєвропейським стандартним часом)
-    </footer>
 
-    <script>
-      prettyPrint();
-    </script>
-    <script src="scripts/linenumber.js"></script>
-  </body>
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>React IPZ Project</h1>
+<p>Короткий опис</p>
+<p>Навчальний проект на React для предмету КОП. Містить реалізацію гри чотири в ряд(Connect-four), UI-компоненти та інструменти для документації й тестування компонентів.</p>
+<p>Автор</p>
+<p>Project Oleg-Ischuk <a href="mailto:olegischuk594@gmail.com">olegischuk594@gmail.com</a></p>
+<p>Ліцензія</p>
+<p>Проєкт розповсюджується під ліцензією MIT — див. файл <a href="LICENSE">LICENSE</a>.</p>
+<p>Також у корені проєкту згенеровано звіт по ліцензіях залежностей <code>license-report.txt</code>.</p>
+<p>Політика конфіденційності</p>
+<ul>
+<li>Політика: <a href="PRIVACY_POLICY.md">PRIVACY_POLICY.md</a></li>
+</ul>
+<p>Вимоги</p>
+<ul>
+<li>Node.js 18+ та npm</li>
+</ul>
+<p>Встановлення</p>
+<pre class="prettyprint source lang-bash"><code>npm install
+</code></pre>
+<p>Основні команди</p>
+<ul>
+<li><code>npm run dev</code> — запуск застосунку в режимі розробки (Vite)</li>
+<li><code>npm run build</code> — збірка для продакшену</li>
+<li><code>npm run preview</code> — локальний перегляд збірки</li>
+<li><code>npm run lint</code> — перевірка коду ESLint</li>
+<li><code>npm run license-check</code> — згенерувати <code>license-report.txt</code> (використовує <code>license-checker</code> і скрипт конвертації). Після виконання у корені з'явиться <code>license-report.txt</code>.</li>
+<li><code>npm run docs</code> — згенерувати документацію JSDoc (вивід у <code>out/docs</code>)</li>
+<li><code>npm run storybook</code> — запустити Storybook (після встановлення залежностей Storybook)</li>
+<li><code>npm run build-storybook</code> — побудувати Storybook статично</li>
+</ul>
+<p>Storybook</p>
+<p>У проєкт додано базову конфігурацію Storybook у папці <code>.storybook</code> і історії для компонентів <code>Button</code> та <code>Modal</code> у <code>src/components/*/*.stories.jsx</code>.</p>
+<p>Перед запуском Storybook встановіть dev-залежності:</p>
+<pre class="prettyprint source lang-bash"><code>npm install --save-dev @storybook/react-vite @storybook/addon-essentials
+</code></pre>
+<p>Запуск:</p>
+<pre class="prettyprint source lang-bash"><code>npm run storybook
+</code></pre>
+<p>Документація</p>
+<p>Конфігурація JSDoc знаходиться в <code>jsdoc.json</code>. За замовчуванням документація генерується в <code>out/docs</code> командою:</p>
+<pre class="prettyprint source lang-bash"><code>npm run docs
+</code></pre>
+<p>Cookie / GDPR</p>
+<p>Додано компонент cookie-попап: <code>src/components/CookieConsent/CookieConsent.jsx</code>. За замовчуванням вибір зберігається в <code>localStorage</code>. Оновіть <code>PRIVACY_POLICY.md</code> та поведінку компонента при додаванні аналітики.</p>
+<p>Звіт по ліцензіях</p>
+<p>Команда <code>npm run license-check</code> створює <code>license-report.txt</code> з інформацією про ліцензії залежностей. Перевірте наявність несумісних ліцензій і за потреби замініть пакети.</p>
+<p>Контакти та внесок</p>
+<p>Якщо хочете додати зміни або оновити автора — змініть секцію <code>Author</code> вище та відкрийте PR.</p>
+<p>Contributing</p>
+<ol>
+<li>Форкніть репозиторій</li>
+<li>Створіть гілку <code>feature/your-feature</code></li>
+<li>Внесіть зміни і додайте тести/історії</li>
+<li>Відкрийте pull request</li>
+</ol>
+<p>Додатково</p>
+<ul>
+<li>Згенерована документація JSDoc доступна у <code>out/docs</code>.</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Button">Button</a></li><li><a href="global.html#Modal">Modal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 12 2026 15:54:08 GMT+0100 (за центральноєвропейським стандартним часом)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
 </html>

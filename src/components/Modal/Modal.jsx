@@ -2,6 +2,14 @@ import { createPortal } from "react-dom";
 import { useEffect } from "react";
 import styles from "./Modal.module.css";
 
+/**
+ * Модальне вікно — рендериться в портал при `isOpen`.
+ *
+ * @param {object} props
+ * @param {boolean} props.isOpen - Показувати модальне вікно
+ * @param {Function} props.onClose - Закрити модальне вікно
+ * @param {*} props.children - Вміст модального вікна
+ */
 function Modal({ isOpen, onClose, children }) {
   useEffect(() => {
     if (isOpen) {
@@ -23,7 +31,7 @@ function Modal({ isOpen, onClose, children }) {
         {children}
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }
 
