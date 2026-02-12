@@ -67,77 +67,83 @@ npm install --save-dev @storybook/react-vite @storybook/addon-essentials
 
 ---
 
-**Структура (повна)**
+**Структура**
 
-- `eslint.config.js`
-- `index.html`
-- `jsdoc.json`
-- `LICENSE`
-- `license-report.txt`
-- `package.json`
-- `PRIVACY_POLICY.md`
-- `README.md`
-- `vite.config.js`
-- `src/`
-  - `App.jsx`
-  - `App.module.css`
-  - `main.jsx`
-  - `components/`
-    - `Board/`
-      - `Board.jsx`
-      - `Board.module.css`
-    - `Button/`
-      - `Button.jsx`
-      - `Button.module.css`
-      - `Button.stories.jsx`
-    - `Cell/`
-      - `Cell.jsx`
-      - `Cell.module.css`
-    - `CookieConsent/`
-      - `CookieConsent.jsx`
-      - `CookieConsent.module.css`
-    - `GameInfo/`
-      - `GameInfo.jsx`
-      - `GameInfo.module.css`
-    - `Modal/`
-      - `Modal.jsx`
-      - `Modal.module.css`
-      - `Modal.stories.jsx`
-    - `ResultsModal/`
-      - `ResultsModal.jsx`
-      - `ResultsModal.module.css`
-    - `ResultsTable/`
-      - `ResultsTable.jsx`
-      - `ResultsTable.module.css`
-    - `SettingsForm/`
-      - `SettingsForm.jsx`
-      - `SettingsForm.module.css`
-  - `constants/`
-    - `gameSettings.js`
-  - `hooks/`
-    - `index.js`
-    - `useBoardClick.js`
-    - `useConnectFour.js`
-    - `useNavigation.js`
-  - `pages/`
-    - `GamePage/`
-      - `GamePage.jsx`
-      - `GamePage.module.css`
-    - `ResultsPage/`
-      - `ResultsPage.jsx`
-      - `ResultsPage.module.css`
-    - `SettingsPage/`
-      - `SettingsPage.jsx`
-      - `SettingsPage.module.css`
-    - `StartPage/`
-      - `StartPage.jsx`
-      - `StartPage.module.css`
-  - `store/`
-    - `gameStore.js`
-    - `resultsStore.js`
-  - `utils/`
-    - `generateId.js`
-    - `validation.js`
+```
+REACT-IPZ-23-1/
+│
+├── eslint.config.js
+├── index.html
+├── jsdoc.json
+├── LICENSE
+├── license-report.txt
+├── package.json
+├── PRIVACY_POLICY.md
+├── README.md
+├── vite.config.js
+├── .gitignore
+├── src/
+│   ├── App.jsx
+│   ├── App.module.css
+│   ├── main.jsx
+│   ├── components/
+│   │   ├── Board/
+│   │   │   ├── Board.jsx
+│   │   │   └── Board.module.css
+│   │   ├── Button/
+│   │   │   ├── Button.jsx
+│   │   │   ├── Button.module.css
+│   │   │   └── Button.stories.jsx
+│   │   ├── Cell/
+│   │   │   ├── Cell.jsx
+│   │   │   └── Cell.module.css
+│   │   ├── CookieConsent/
+│   │   │   ├── CookieConsent.jsx
+│   │   │   └── CookieConsent.module.css
+│   │   ├── GameInfo/
+│   │   │   ├── GameInfo.jsx
+│   │   │   └── GameInfo.module.css
+│   │   ├── Modal/
+│   │   │   ├── Modal.jsx
+│   │   │   ├── Modal.module.css
+│   │   │   └── Modal.stories.jsx
+│   │   ├── ResultsModal/
+│   │   │   ├── ResultsModal.jsx
+│   │   │   └── ResultsModal.module.css
+│   │   ├── ResultsTable/
+│   │   │   ├── ResultsTable.jsx
+│   │   │   └── ResultsTable.module.css
+│   │   └── SettingsForm/
+│   │       ├── SettingsForm.jsx
+│   │       └── SettingsForm.module.css
+│   ├── constants/
+│   │   └── gameSettings.js
+│   ├── hooks/
+│   │   ├── index.js
+│   │   ├── useBoardClick.js
+│   │   ├── useConnectFour.js
+│   │   └── useNavigation.js
+│   ├── pages/
+│   │   ├── GamePage/
+│   │   │   ├── GamePage.jsx
+│   │   │   └── GamePage.module.css
+│   │   ├── ResultsPage/
+│   │   │   ├── ResultsPage.jsx
+│   │   │   └── ResultsPage.module.css
+│   │   ├── SettingsPage/
+│   │   │   ├── SettingsPage.jsx
+│   │   │   └── SettingsPage.module.css
+│   │   └── StartPage/
+│   │       ├── StartPage.jsx
+│   │       └── StartPage.module.css
+│   ├── store/
+│   │   ├── gameStore.js
+│   │   └── resultsStore.js
+│   └── utils/
+│       ├── generateId.js
+│       └── validation.js
+└── out/docs
+```
 
 **Cookie / Конфіденційність**
 
@@ -172,5 +178,3 @@ npm install --save-dev @storybook/react-vite @storybook/addon-essentials
 **Контакти**
 
 Oleh Ishchuk — olegischuk594@gmail.com
-
-Дякую за перегляд — якщо хочете, можу також створити коротку секцію з інструкцією для розробників (git hooks, формат комітів, запуск тестів).
