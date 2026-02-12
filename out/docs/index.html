@@ -44,64 +44,91 @@
 
     <section>
         <article><h1>React IPZ Project</h1>
-<p>Короткий опис</p>
-<p>Навчальний проект на React для предмету КОП. Містить реалізацію гри чотири в ряд(Connect-four), UI-компоненти та інструменти для документації й тестування компонентів.</p>
-<p>Автор</p>
-<p>Project Oleg-Ischuk <a href="mailto:olegischuk594@gmail.com">olegischuk594@gmail.com</a></p>
-<p>Ліцензія</p>
-<p>Проєкт розповсюджується під ліцензією MIT — див. файл <a href="LICENSE">LICENSE</a>.</p>
-<p>Також у корені проєкту згенеровано звіт по ліцензіях залежностей — <a href="license-report.txt">license-report.txt</a>.</p>
-<p>Політика конфіденційності</p>
+<h1>React Connect Four — Навчальний проєкт</h1>
+<p>Невеликий проєкт на React: реалізація гри &quot;Чотири в ряд&quot; (Connect Four) з компонентною архітектурою, Storybook та JSDoc-документацією.</p>
+<p><strong>Автор:</strong> Oleh Ishchuk (<a href="mailto:olegischuk594@gmail.com">olegischuk594@gmail.com</a>)</p>
+<hr>
+<p><strong>Швидкий старт</strong></p>
 <ul>
-<li>Політика: <a href="PRIVACY_POLICY.md">PRIVACY_POLICY.md</a></li>
+<li><strong>Вимоги:</strong> Node.js 18+ та npm</li>
+<li>Встановлення залежностей:</li>
 </ul>
-<p>Вимоги</p>
-<ul>
-<li>Node.js 18+ та npm</li>
-</ul>
-<p>Встановлення</p>
 <pre class="prettyprint source lang-bash"><code>npm install
 </code></pre>
-<p>Основні команди</p>
 <ul>
-<li><code>npm run dev</code> — запуск застосунку в режимі розробки (Vite)</li>
-<li><code>npm run build</code> — збірка для продакшену</li>
-<li><code>npm run preview</code> — локальний перегляд збірки</li>
-<li><code>npm run lint</code> — перевірка коду ESLint</li>
-<li><code>npm run license-check</code> — згенерувати <code>license-report.txt</code> (використовує <code>license-checker</code> і скрипт конвертації). Після виконання у корені з'явиться <code>license-report.txt</code>.</li>
-<li><code>npm run docs</code> — згенерувати документацію JSDoc (вивід у <code>out/docs</code>)</li>
-<li><code>npm run storybook</code> — запустити Storybook (після встановлення залежностей Storybook)</li>
-<li><code>npm run build-storybook</code> — побудувати Storybook статично</li>
+<li>Запуск у режимі розробки:</li>
 </ul>
-<p>Storybook</p>
-<p>У проєкт додано базову конфігурацію Storybook у папці <code>.storybook</code> і історії для компонентів <code>Button</code> та <code>Modal</code> у <code>src/components/*/*.stories.jsx</code>.</p>
-<p>Перед запуском Storybook встановіть dev-залежності:</p>
+<pre class="prettyprint source lang-bash"><code>npm run dev
+</code></pre>
+<ul>
+<li>Збірка для продакшену:</li>
+</ul>
+<pre class="prettyprint source lang-bash"><code>npm run build
+</code></pre>
+<ul>
+<li>Локальний перегляд збірки:</li>
+</ul>
+<pre class="prettyprint source lang-bash"><code>npm run preview
+</code></pre>
+<hr>
+<p><strong>Ключові команди</strong></p>
+<ul>
+<li><code>npm run dev</code> — запуск застосунку (Vite)</li>
+<li><code>npm run build</code> — продакшен-збірка</li>
+<li><code>npm run preview</code> — перегляд збірки локально</li>
+<li><code>npm run docs</code> — згенерувати документацію JSDoc (вивід у <code>out/docs</code>)</li>
+<li><code>npm run storybook</code> — запустити Storybook</li>
+<li><code>npm run license-check</code> — згенерувати звіт ліцензій (<code>license-report.txt</code>)</li>
+</ul>
+<blockquote>
+<p>Зауваження: перед запуском Storybook може знадобитися встановити dev-залежності:</p>
+</blockquote>
 <pre class="prettyprint source lang-bash"><code>npm install --save-dev @storybook/react-vite @storybook/addon-essentials
 </code></pre>
-<p>Запуск:</p>
-<pre class="prettyprint source lang-bash"><code>npm run storybook
-</code></pre>
-<p>Документація</p>
-<p>Конфігурація JSDoc знаходиться в <code>jsdoc.json</code>. За замовчуванням документація генерується в <code>out/docs</code> командою:</p>
-<pre class="prettyprint source lang-bash"><code>npm run docs
-</code></pre>
-<p>Cookie / GDPR</p>
-<p>Додано компонент cookie-попап: <code>src/components/CookieConsent/CookieConsent.jsx</code>. За замовчуванням вибір зберігається в <code>localStorage</code>. Оновіть <code>PRIVACY_POLICY.md</code> та поведінку компонента при додаванні аналітики.</p>
-<p>Звіт по ліцензіях</p>
-<p>Команда <code>npm run license-check</code> створює <code>license-report.txt</code> з інформацією про ліцензії залежностей. Перевірте наявність несумісних ліцензій і за потреби замініть пакети.</p>
-<p>Контакти та внесок</p>
-<p>Якщо хочете додати зміни або оновити автора — змініть секцію <code>Author</code> вище та відкрийте PR.</p>
-<p>Contributing</p>
+<hr>
+<p><strong>Опис проєкту</strong></p>
+<p>Проєкт містить:</p>
+<ul>
+<li>Логіку гри та інтерфейс: компоненти в <code>src/components</code> та сторінки в <code>src/pages</code>.</li>
+<li>Хуки для логіки гри у <code>src/hooks</code>.</li>
+<li>Зберігання стану в <code>src/store</code>.</li>
+<li>Компоненти: <code>Board</code>, <code>Cell</code>, <code>Button</code>, <code>Modal</code>, <code>ResultsTable</code>, <code>CookieConsent</code> тощо.</li>
+</ul>
+<p>Код організовано для зручності розробки та розширення — додавайте історії Storybook і тести для нових компонентів.</p>
+<hr>
+<p><strong>Структура (коротко)</strong></p>
+<ul>
+<li><code>src/components/</code> — UI-компоненти</li>
+<li><code>src/pages/</code> — сторінки додатку</li>
+<li><code>src/hooks/</code> — користувацькі хуки</li>
+<li><code>src/store/</code> — простий state management</li>
+<li><code>src/utils/</code> — утиліти</li>
+</ul>
+<hr>
+<p><strong>Cookie / Конфіденційність</strong></p>
+<p>Компонент згоди на cookie знаходиться в <code>src/components/CookieConsent/CookieConsent.jsx</code> і зберігає вибір у <code>localStorage</code>. Перегляньте <code>PRIVACY_POLICY.md</code> для деталей.</p>
+<hr>
+<p><strong>Документація та Storybook</strong></p>
+<ul>
+<li>JSDoc: конфігурація в <code>jsdoc.json</code>, генерація в <code>out/docs</code> командою <code>npm run docs</code>.</li>
+<li>Storybook: історії знаходяться поруч з компонентами у <code>src/components/*/*.stories.jsx</code>.</li>
+</ul>
+<hr>
+<p><strong>Ліцензія</strong></p>
+<p>Проєкт поширюється під ліцензією MIT — див. файл <a href="LICENSE">LICENSE</a>.</p>
+<p>Звіт по ліцензіях залежностей: <code>license-report.txt</code> (згенерований командою <code>npm run license-check</code>).</p>
+<hr>
+<p><strong>Внесок</strong></p>
 <ol>
 <li>Форкніть репозиторій</li>
 <li>Створіть гілку <code>feature/your-feature</code></li>
-<li>Внесіть зміни і додайте тести/історії</li>
-<li>Відкрийте pull request</li>
+<li>Додайте зміни, тести та/або історії</li>
+<li>Відкрийте Pull Request</li>
 </ol>
-<p>Додатково</p>
-<ul>
-<li>Згенерована документація JSDoc доступна у <code>out/docs</code>.</li>
-</ul></article>
+<hr>
+<p><strong>Контакти</strong></p>
+<p>Oleh Ishchuk — olegischuk594@gmail.com</p>
+<p>Дякую за перегляд — якщо хочете, можу також створити коротку секцію з інструкцією для розробників (git hooks, формат комітів, запуск тестів).</p></article>
     </section>
 
 
@@ -118,7 +145,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 12 2026 16:42:54 GMT+0100 (за центральноєвропейським стандартним часом)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 12 2026 17:06:28 GMT+0100 (за центральноєвропейським стандартним часом)
 </footer>
 
 <script> prettyPrint(); </script>
