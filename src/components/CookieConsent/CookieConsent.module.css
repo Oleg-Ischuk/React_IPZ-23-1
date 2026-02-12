@@ -3,7 +3,7 @@
   left: 16px;
   right: 16px;
   bottom: 16px;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
   border-radius: 8px;
   padding: 12px;
@@ -15,8 +15,13 @@
   justify-content: space-between;
   gap: 12px;
 }
-.text { flex: 1; }
-.actions { display: flex; gap: 8px; }
+.text {
+  flex: 1;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+}
 .accept {
   background: #4caf50;
   color: #fff;
@@ -27,7 +32,56 @@
 .manage {
   background: transparent;
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.decline {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.modalContent {
+  padding: 16px;
+  max-width: 560px;
+}
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+.category {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.catInfo {
+  display: flex;
+  flex-direction: column;
+}
+.catName {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.catDesc {
+  font-size: 13px;
+  color: #666;
+}
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+.save {
+  background: #1976d2;
+  color: #fff;
+  border: none;
   padding: 8px 12px;
   border-radius: 4px;
 }
