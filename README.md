@@ -4,7 +4,7 @@
 
 Навчальний проект на React для предмету КОП. Містить реалізацію гри чотири в ряд(Connect-four), UI-компоненти та інструменти для документації й тестування компонентів.
 
-Автор
+Автор Oleh Ishchuk
 
 Project Oleg-Ischuk <olegischuk594@gmail.com>
 
@@ -37,7 +37,6 @@ npm install
 - `npm run license-check` — згенерувати `license-report.txt` (використовує `license-checker` і скрипт конвертації). Після виконання у корені з'явиться `license-report.txt`.
 - `npm run docs` — згенерувати документацію JSDoc (вивід у `out/docs`)
 - `npm run storybook` — запустити Storybook (після встановлення залежностей Storybook)
-- `npm run build-storybook` — побудувати Storybook статично
 
 Storybook
 
