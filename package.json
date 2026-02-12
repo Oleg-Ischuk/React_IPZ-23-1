@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "license-check": "npx license-checker --production --json --out license-report.json && node scripts/convert-license-txt.js",
+    "license-check": "npx license-checker --production > license-report.txt",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
