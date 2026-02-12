@@ -2,7 +2,7 @@
 
 # React Connect Four — Навчальний проєкт
 
-Коштовний невеликий проєкт на React: реалізація гри "Чотири в ряд" (Connect Four) з компонентною архітектурою, Storybook та JSDoc-документацією.
+Невеликий проєкт на React: реалізація гри "Чотири в ряд" (Connect Four) з компонентною архітектурою, Storybook та JSDoc-документацією.
 
 **Автор:** Oleh Ishchuk (<olegischuk594@gmail.com>)
 
@@ -42,7 +42,6 @@ npm run preview
 - `npm run dev` — запуск застосунку (Vite)
 - `npm run build` — продакшен-збірка
 - `npm run preview` — перегляд збірки локально
-- `npm run lint` — перевірка коду ESLint
 - `npm run docs` — згенерувати документацію JSDoc (вивід у `out/docs`)
 - `npm run storybook` — запустити Storybook
 - `npm run license-check` — згенерувати звіт ліцензій (`license-report.txt`)
