@@ -11,5 +11,12 @@
     "destination": "out/docs",
     "recurse": true,
     "readme": "README.md"
+  },
+  "templates": {
+    "default": {
+      "staticFiles": {
+        "include": ["./license-report.txt"]
+      }
+    }
   }
 }

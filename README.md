@@ -12,7 +12,7 @@ Project Oleg-Ischuk <olegischuk594@gmail.com>
 
 Проєкт розповсюджується під ліцензією MIT — див. файл [LICENSE](LICENSE).
 
-Також у корені проєкту згенеровано звіт по ліцензіях залежностей `license-report.txt`.
+Також у корені проєкту згенеровано звіт по ліцензіях залежностей — [license-report.txt](license-report.txt).
 
 Політика конфіденційності
 
