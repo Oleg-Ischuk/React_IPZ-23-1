@@ -1,6 +1,6 @@
 # React IPZ Project
 
-# React Connect Four — Навчальний проєкт
+# Connect Four — Навчальний проєкт
 
 Невеликий проєкт на React: реалізація гри "Чотири в ряд" (Connect Four) з компонентною архітектурою, Storybook та JSDoc-документацією.
 
@@ -39,6 +39,7 @@ npm run preview
 
 **Ключові команди**
 
+- `npm i` — встановлення залежностей
 - `npm run dev` — запуск застосунку (Vite)
 - `npm run build` — продакшен-збірка
 - `npm run preview` — перегляд збірки локально
